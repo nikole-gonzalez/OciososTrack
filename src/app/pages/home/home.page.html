@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+
+    <ion-buttons slot="start">
+      <ion-back-button default="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Tus intereses
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-tabs>
+  <ion-content [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
+    <ion-grid>
+      <ion-row >
+        <ion-col col-6>
+          <ion-card  (click)="ingresarListadoLibros()" style="--padding-top: 0;" class = shadow-pop-tr>
+            <img alt="Silhouette of mountains" src="https://blog.casadellibro.com/wp-content/uploads/2023/04/booksss.jpg" />
+            <ion-card-header>
+              <ion-card-title>Libros</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+
+          <br>
+
+          <ion-card class = "shadow-pop-tr">
+            <img alt="Silhouette of mountains" src="https://img.europapress.es/fotoweb/fotonoticia_20230212090350_690.jpg" />
+            <ion-card-header>
+              <ion-card-title>Series</ion-card-title> 
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="person-outline"></ion-icon>
+      Cuenta
+    </ion-tab-button>
+
+    <ion-tab-button tab="search">
+      <ion-icon name="search"></ion-icon>
+      Buscar
+    </ion-tab-button>
+
+    <ion-tab-button tab="library">
+      <ion-icon name="cog-outline"></ion-icon>
+      Configuración
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

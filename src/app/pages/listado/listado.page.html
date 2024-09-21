@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-tabs>
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ion-card (click)="ingresaraorgullo()">
+    <ion-card-header>
+      <ion-card-title>Mis libros</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="assets/Imagenes/Orgullo y prejuicio.jpeg" />
+          </ion-thumbnail>
+          <ion-label>Orgullo y prejuicio </ion-label>
+        </ion-item>
+       
+      </ion-list>
+    </ion-card-content>
+  </ion-card> 
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home">
+    <ion-icon name="person-outline"></ion-icon>
+    Cuenta
+  </ion-tab-button>
+
+  <ion-tab-button tab="search">
+    <ion-icon name="search"></ion-icon>
+    Buscar
+  </ion-tab-button>
+
+  <ion-tab-button tab="library">
+    <ion-icon name="cog-outline"></ion-icon>
+    Configuración
+  </ion-tab-button>
+</ion-tab-bar>
+</ion-tabs>
+
+
+
+
+
+
+
+
+  
+
+
+

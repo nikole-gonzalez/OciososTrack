@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+    <ion-title>Recupera tu contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: rgb(246, 244, 235);">
+  
+  <ion-card>
+    <h3>¿Olvidaste tu contraseña?</h3>
+      <ion-card-header>
+      <ion-card-subtitle>Ingresa tu correo electrónico y recibirás un correo con las instrucciones.</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-input label="Correo" type="email" placeholder="Correo electrónico" [(ngModel)]="recuperaContrasena.recuperaCorreo"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button class="btn-block" expand="block" (click)="redirigeLogin()">Continuar</ion-button>
+      
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
