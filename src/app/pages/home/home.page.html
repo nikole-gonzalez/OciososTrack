@@ -2,7 +2,7 @@
   <ion-toolbar style="--background: rgb(246, 244, 235);">
 
     <ion-buttons slot="start">
-      <ion-back-button default="/"></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
 
     <ion-title>
@@ -25,7 +25,7 @@
 
           <br>
 
-          <ion-card class = "shadow-pop-tr">
+          <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class = "shadow-pop-tr">
             <img alt="Silhouette of mountains" src="https://img.europapress.es/fotoweb/fotonoticia_20230212090350_690.jpg" />
             <ion-card-header>
               <ion-card-title>Series</ion-card-title> 
