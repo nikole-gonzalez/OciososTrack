@@ -10,6 +10,7 @@ export class ListadoSeriesPage implements OnInit {
 
   constructor(private router: Router) { }
 
+  //Navegación entre páginas   
   ingresarbluey(){
     this.router.navigate(['/bluey'])
   }

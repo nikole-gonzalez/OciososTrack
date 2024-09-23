@@ -33,6 +33,8 @@ export class LoginPage implements OnInit, AfterViewInit {
     this.createAnimation();
   }
 
+
+  // Función de validación modelo 
   validaModeloLogin(model: any): boolean {
     for (const [key, value] of Object.entries(model)) {
       if (value === "") {
@@ -43,14 +45,18 @@ export class LoginPage implements OnInit, AfterViewInit {
     return true;
   }
 
+  // Validación que el nombre tenga más de 3 caracteres 
   validaNombreUsuario(nombre: string): boolean {
     return nombre.length >= 3;
   }
 
+  // Validación que la contraseña tenga almenos una letra mayúscula y una extensión de 6 caracteres. 
   validaContrasena(contrasena: string): boolean {
     const patronMayuscula = /[A-Z]/; 
     return contrasena.length >= 6 && patronMayuscula.test(contrasena);
   }
+
+  //Función que permite ingresar a la aplicación. 
 
   ingresarLogin() {
     if (this.validaModeloLogin(this.login)) {
@@ -67,9 +73,13 @@ export class LoginPage implements OnInit, AfterViewInit {
     }
   }
 
+  // Función de navegación 
+
   redirigeContrasena() {
     this.router.navigate(['/recupera-contrasena']);
   }
+
+  //Función del Toast 
 
   async presentToast(position: 'top' | 'middle' | 'bottom', mensajeToast: string) {
     const toast = await this.toastController.create({
@@ -80,6 +90,8 @@ export class LoginPage implements OnInit, AfterViewInit {
 
     await toast.present();
   }
+
+  //Función de animación ionic 
 
   createAnimation() {
     const imgLoginAnimation = this.animationController

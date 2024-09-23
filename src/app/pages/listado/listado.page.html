@@ -9,6 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
+<!--Cards contenido de libros-->
 <ion-tabs>
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
   <ion-card (click)="ingresaraorgullo()">
@@ -19,7 +20,7 @@
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img alt="Silhouette of mountains" src="assets/Imagenes/Orgullo y prejuicio.jpeg" />
+            <img alt="img Orgullo y prejuicio" src="assets/Imagenes/Orgullo y prejuicio.jpeg" />
           </ion-thumbnail>
           <ion-label>Orgullo y prejuicio </ion-label>
         </ion-item>
@@ -27,6 +28,8 @@
       </ion-list>
     </ion-card-content>
   </ion-card> 
+
+  <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
@@ -35,7 +38,7 @@
 </ion-content>
 
 
-
+<!--Tab-->
 <ion-tab-bar slot="bottom">
   <ion-tab-button tab="home">
     <ion-icon name="person-outline"></ion-icon>

@@ -19,7 +19,7 @@ export function playerFactory() {
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: provideLottieOptions({
-    player: () => import('lottie-web'), // Importación asíncrona del player de Lottie
+    player: () => import('lottie-web'), // Importación asíncrona de Lottie
   }),
   bootstrap: [AppComponent],
 })

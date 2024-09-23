@@ -11,6 +11,8 @@ export class ListadoPage implements OnInit {
 
   constructor( private router: Router) {}
 
+  // Función navegación entre páginas 
+  
   ingresaraorgullo(){
     this.router.navigate(['/orgullo'])
   }

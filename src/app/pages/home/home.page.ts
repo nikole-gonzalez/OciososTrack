@@ -10,6 +10,7 @@ export class HomePage {
 
   constructor( private router: Router) {}
 
+  // Función navegar entre páginas
   ingresarListadoLibros (){
     this.router.navigate(['/listado'])
   }
