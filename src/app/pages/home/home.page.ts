@@ -13,4 +13,8 @@ export class HomePage {
   ingresarListadoLibros (){
     this.router.navigate(['/listado'])
   }
+
+  ingresarListadoSeries(){
+    this.router.navigate(['listado-series'])
+  }
 }

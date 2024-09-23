@@ -28,9 +28,19 @@ const routes: Routes = [
     loadChildren: () => import('./pages/orgullo/orgullo.module').then( m => m.OrgulloPageModule)
   },
   {
+    path: 'listado-series',
+    loadChildren: () => import('./pages/listado-series/listado-series.module').then( m => m.ListadoSeriesPageModule)
+  },
+  {
+    path: 'bluey',
+    loadChildren: () => import('./pages/bluey/bluey.module').then( m => m.BlueyPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
+  
+  
   
 ];
 
