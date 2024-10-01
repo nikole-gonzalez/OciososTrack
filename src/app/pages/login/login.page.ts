@@ -79,6 +79,11 @@ export class LoginPage implements OnInit, AfterViewInit {
     this.router.navigate(['/recupera-contrasena']);
   }
 
+  // Navegación al registro 
+  ingresarRegistro(){
+    this.router.navigate(['/registrarse'])
+  }
+
   //Función del Toast 
 
   async presentToast(position: 'top' | 'middle' | 'bottom', mensajeToast: string) {

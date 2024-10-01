@@ -35,13 +35,17 @@ const routes: Routes = [
     path: 'bluey',
     loadChildren: () => import('./pages/bluey/bluey.module').then( m => m.BlueyPageModule)
   },
+
+  {
+    path: 'registrarse',
+    loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
+  },
   {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
   
-  
-  
+    
 ];
 
 @NgModule({

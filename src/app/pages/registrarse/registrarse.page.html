@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" style="--background: rgb(246, 244, 235);">
+
+  <!--Card con información del login-->
+  <ion-card>
+    <h3>Ociosos Track</h3>
+    <img  #imgLogin alt="imagenOciososTrack" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1FEOVsgXq3mT3kWXIrdxCoeRke5jX3H_WPuI9f5duG-FMSw4A" />
+    <ion-card-header>
+      <ion-card-title>Registro</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-input label=" Nombre de Usuario" labelPlacement="stacked" placeholder="Nombre de usuario" [(ngModel)]="registro.nombreUsuarioReg"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Correo electrónico"  type="email" labelPlacement="stacked" placeholder="Correo electrónico" [(ngModel)]="registro.correoReg"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña" [(ngModel)]="registro.contrasenaReg"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Repita su contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña" [(ngModel)]="registro.contrasenaRepetidaReg"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="registraUsuario()">Crear cuenta</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
