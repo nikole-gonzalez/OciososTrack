@@ -1,0 +1,29 @@
+ion-title{
+    text-align: center;
+}
+
+ion-card{
+    text-align: center;
+    background-color: rgb(246, 244, 235);
+}
+
+
+h3{
+    text-align: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(116, 155, 194);
+}
+
+.btn-block {
+    --background: rgb(116, 155, 194);
+    --color: white;
+}
+
+ion-button[fill="clear"]{
+    color: rgb(116, 155, 194);
+    --justify-content: center;
+}
+
+ion-card-title{
+    color: rgb(70, 130, 169);
+}
