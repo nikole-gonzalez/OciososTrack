@@ -10,6 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideLottieOptions } from 'ngx-lottie';
 import player from 'lottie-web';
 
+import { IonicStorageModule } from '@ionic/storage-angular';
+
+import { provideHttpClient } from '@angular/common/http';  // En lugar de HttpClientModule
+
+
+
 
 export function playerFactory() {
   return player;
@@ -17,11 +23,12 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: provideLottieOptions({
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  providers: [ provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
-  }),
+  }), provideHttpClient()],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
 
