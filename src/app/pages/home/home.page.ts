@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthlocalService } from 'src/app/services/authlocal.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,22 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor( private router: Router) {}
+  constructor( private router: Router,
+               private authlocalService : AuthlocalService
+  ) {}
+
+  ngOnInit() {
+    if (!this.authlocalService.gUsuarioAutenticado()) {
+      // Si no está autenticado, lo redirigimos al login
+      this.router.navigate(['/login']);
+    }
+  }
+
+  //Función para cerrar sesión
+  gcerrarSesion() {
+    this.authlocalService.gCerrarSesion(); // Elimina el token de localStorage
+    this.router.navigate(['/login']); // Redirige al login
+  }
 
   // Función navegar entre páginas
   ingresarListadoLibros (){
