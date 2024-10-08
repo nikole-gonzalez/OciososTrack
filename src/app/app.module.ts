@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { provideLottieOptions } from 'ngx-lottie';
 import player from 'lottie-web';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 
 export function playerFactory() {
@@ -17,7 +18,7 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
   }),
