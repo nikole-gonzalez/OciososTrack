@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController, ToastController, Animation } from '@ionic/angular';
+import { AuthlocalService } from 'src/app/services/authlocal.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginPage implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private toastController: ToastController,
-    private animationController: AnimationController
+    private animationController: AnimationController,
+    private authlocal: AuthlocalService
   ) { }
 
   ngOnInit() { }
@@ -65,6 +67,13 @@ export class LoginPage implements OnInit, AfterViewInit {
       } else if (!this.validaContrasena(this.login.contrasenaLogin)) {
         this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
       } else {
+        // Simulamos recibir un token desde el servidor
+        const tokenSimulado = 'mi-token-de-autenticacion';
+        
+        // Guardamos el token en localStorage usando el servicio de autenticación
+        this.authlocal.gInicioSesion(tokenSimulado);
+
+        // Navegamos al home
         this.router.navigate(['/home']);
         this.presentToast("top", "Bienvenido ");
       }
