@@ -23,3 +23,6 @@ gInicioSesion(token: string): void {
     localStorage.removeItem('token'); // Elimina el token
     }
   }
+
+
+

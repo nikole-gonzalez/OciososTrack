@@ -9,29 +9,32 @@ import { AuthlocalService } from 'src/app/services/authlocal.service';
 })
 export class HomePage {
 
-  constructor( private router: Router,
-               private authlocalService : AuthlocalService
-  ) {}
+  constructor(private router: Router,
+              private authlocalService: AuthlocalService) {}
 
   ngOnInit() {
     if (!this.authlocalService.gUsuarioAutenticado()) {
-      // Si no está autenticado, lo redirigimos al login
       this.router.navigate(['/login']);
     }
   }
 
-  //Función para cerrar sesión
+  // Función para cerrar sesión
   gcerrarSesion() {
-    this.authlocalService.gCerrarSesion(); // Elimina el token de localStorage
-    this.router.navigate(['/login']); // Redirige al login
+    this.authlocalService.gCerrarSesion();
+    this.router.navigate(['/login']);
   }
 
   // Función navegar entre páginas
-  ingresarListadoLibros (){
-    this.router.navigate(['/listado'])
+  ingresarListadoLibros() {
+    this.router.navigate(['/listado']);
   }
 
-  ingresarListadoSeries(){
-    this.router.navigate(['listado-series'])
+  ingresarListadoSeries() {
+    this.router.navigate(['/listado-series']);
+  }
+
+  // Función para detectar si estamos en la ruta principal de 'home'
+  esHomeRuta(): boolean {
+    return this.router.url === '/home';
   }
 }

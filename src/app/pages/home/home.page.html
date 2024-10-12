@@ -1,66 +1,57 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar style="--background: rgb(246, 244, 235);">
-
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
-    </ion-buttons>
-
-    <ion-title>
-      Tus intereses
-    </ion-title>
+  <ion-toolbar *ngIf="esHomeRuta()" style="--background: rgb(246, 244, 235);">
+    <ion-title>Tus intereses</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<!--Cards home categorías ocio-->
+<!-- Solo muestra el contenido de las categorías cuando estamos en la ruta principal de home -->
+<ion-content [fullscreen]="true" *ngIf="esHomeRuta()" style="--padding-top: 0; --background: rgb(246, 244, 235);">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card (click)="ingresarListadoLibros()" style="--padding-top: 0;" class="shadow-pop-tr">
+          <img alt="img libros home" src="assets/Imagenes/Libroshome.webp" />
+          <ion-card-header>
+            <ion-card-title>Libros</ion-card-title>
+          </ion-card-header>
+        </ion-card>
 
-<ion-tabs>
-  <ion-content [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
-    <ion-grid>
-      <ion-row >
-        <ion-col col-6>
-          <ion-card  (click)="ingresarListadoLibros()" style="--padding-top: 0;" class = shadow-pop-tr>
-            <img alt="img libros home" src="assets/Imagenes/Libroshome.webp" />
-            <ion-card-header>
-              <ion-card-title>Libros</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-
-          <br>
-
-          <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class = "shadow-pop-tr">
-            <img alt="img series home" src="assets/Imagenes/serieshome.jpg" />
-            <ion-card-header>
-              <ion-card-title>Series</ion-card-title> 
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
+        <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class="shadow-pop-tr">
+          <img alt="img series home" src="assets/Imagenes/serieshome.jpg" />
+          <ion-card-header>
+            <ion-card-title>Series</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-button (click)="gcerrarSesion()">Cerrar sesión</ion-button>
-  </ion-content>
+</ion-content>
 
-<!--Tab-->  
+<!-- Tabs que deben contener un ion-router-outlet -->
+<ion-tabs>
+  <ion-router-outlet></ion-router-outlet> <!-- Aquí se cargan las rutas hijas como cuenta, sugerencias, etc. -->
+
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
+    <ion-tab-button tab="cuenta">
       <ion-icon name="person-outline"></ion-icon>
-      Cuenta
+      <ion-label>Cuenta</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="search">
-      <ion-icon name="search"></ion-icon>
-      Buscar
+    <ion-tab-button tab="sugerencias">
+      <ion-icon name="sparkles-outline"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="library">
+    <ion-tab-button tab="configuracion">
       <ion-icon name="cog-outline"></ion-icon>
-      Configuración
+      <ion-label>Configuración</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 
-<!--Fab-->
-<ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px">
+<!-- Fab button solo cuando estás en la página home -->
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px" *ngIf="esHomeRuta()">
   <ion-fab-button>
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
