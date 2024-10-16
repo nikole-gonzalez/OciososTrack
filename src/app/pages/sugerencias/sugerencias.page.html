@@ -16,12 +16,12 @@
         Top 100 películas
       </ion-title>
     </ion-list-header>
-    <ion-list>  
+    <ion-list class="scrollable-list">  
     <ion-item *ngFor="let pelicula of peliculas">
-      <ion-label><h4>{{pelicula.title}}</h4><p>{{pelicula.description}}</p></ion-label>
-      <ion-button>
-        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-      </ion-button>
+      <ion-label><h4>{{pelicula.rank}} {{pelicula.title}} "({{pelicula.year}})"</h4>
+        <img [src]="pelicula.image" alt="Imagen de la película">
+      </ion-label>
+     
     </ion-item>
     </ion-list>
   </ion-card>
