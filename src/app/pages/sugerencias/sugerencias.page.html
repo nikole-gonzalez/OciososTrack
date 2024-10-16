@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>Sugerencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sugerencias</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-list-header>
+      <ion-title>
+        Top 100 películas
+      </ion-title>
+    </ion-list-header>
+    <ion-list>  
+    <ion-item *ngFor="let pelicula of peliculas">
+      <ion-label><h4>{{pelicula.title}}</h4><p>{{pelicula.description}}</p></ion-label>
+      <ion-button>
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

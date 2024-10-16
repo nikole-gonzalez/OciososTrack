@@ -13,6 +13,9 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { provideHttpClient } from '@angular/common/http';  // En lugar de HttpClientModule
 
+import { HttpClientModule } from '@angular/common/http';
+import { Sug1Service } from './services/sug1.service';
+
 
 
 
@@ -22,10 +25,10 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
-  }), provideHttpClient()],
+  }), provideHttpClient(), Sug1Service],
   bootstrap: [AppComponent],
   
 })
