@@ -2,7 +2,7 @@ export class Pelicula {
 
     id: string;
     image: string;
-    tittle: string;
+    title: string;
     rank: number;
     description: string;
     year: number;
