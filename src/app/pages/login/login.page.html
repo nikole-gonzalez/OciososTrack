@@ -9,27 +9,27 @@
   <!--Card con información del login-->
   <ion-card>
     <h3>Ociosos Track</h3>
-    <img  #imgLogin alt="imagenOciososTrack" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1FEOVsgXq3mT3kWXIrdxCoeRke5jX3H_WPuI9f5duG-FMSw4A" />
+    <img  #imgLogin alt="imagenOciososTrack" src="assets/Imagenes/OciososSinFondo.png" />
     <ion-card-header>
       <ion-card-title>Login</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      
+      <form [formGroup]="loginForm">
       <ion-item>
-        <ion-input label="Usuario" labelPlacement="stacked" placeholder="Usuario" [(ngModel)]="login.nombreLogin"></ion-input>
+        <ion-input formControlName="correoLogin" label="Correo" labelPlacement="stacked" placeholder="Correo"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña" [(ngModel)]="login.contrasenaLogin"></ion-input>
+        <ion-input formControlName="contrasenaLogin" label="Contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña"></ion-input>
       </ion-item>
+      </form>
       <br>
-      <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="ingresarLogin()">Ingresar</ion-button>
+      <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="login()">Ingresar</ion-button>
       <br>
       <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="ingresarRegistro()">Regístrate</ion-button>
       <br>
       <ion-button fill="clear" (click)="redirigeContrasena()">¿Olvidaste tu contraseña?</ion-button>
-
-
+      
     </ion-card-content>
   </ion-card>
 </ion-content>

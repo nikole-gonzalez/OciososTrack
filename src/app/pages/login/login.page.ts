@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimationController, ToastController, Animation } from '@ionic/angular';
+import { AnimationController, ToastController, Animation, LoadingController } from '@ionic/angular';
 import { AuthlocalService } from 'src/app/services/authlocal.service';
+import { FirebaseLoginService } from 'src/app/services/firebase-login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,80 +12,59 @@ import { AuthlocalService } from 'src/app/services/authlocal.service';
 })
 export class LoginPage implements OnInit, AfterViewInit {
 
-  login = {
-    nombreLogin: "",
-    contrasenaLogin: ""
-  };
-
-  campos: string = "";
+  loginForm: FormGroup;
 
   @ViewChild('imgLogin', { read: ElementRef, static: true })
   imgLogin!: ElementRef;
 
-  private animation!: Animation;
+  private animation!: Animation; 
 
-  constructor(
+  constructor( 
     private router: Router,
-    private toastController: ToastController,
-    private animationController: AnimationController,
-    private authlocal: AuthlocalService
-  ) { }
+    public formBuilder: FormBuilder, 
+    public loadingCtrl: LoadingController, 
+    public authService: FirebaseLoginService, 
+    private toastController: ToastController, 
+    private animationController : AnimationController) { }
 
-  ngOnInit() { }
 
-  ngAfterViewInit() {
-    this.createAnimation();
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      correoLogin: "",
+      contrasenaLogin: ""
+    })
   }
 
-
-  // Función de validación modelo 
-  validaModeloLogin(model: any): boolean {
-    for (const [key, value] of Object.entries(model)) {
-      if (value === "") {
-        this.campos = key;
-        return false;
-      }
-    }
-    return true;
+  get errorControl(){
+    return this.loginForm.controls;
   }
 
-  // Validación que el nombre tenga más de 3 caracteres 
-  validaNombreUsuario(nombre: string): boolean {
-    return nombre.length >= 3;
-  }
-
-  // Validación que la contraseña tenga almenos una letra mayúscula y una extensión de 6 caracteres. 
-  validaContrasena(contrasena: string): boolean {
-    const patronMayuscula = /[A-Z]/; 
-    return contrasena.length >= 6 && patronMayuscula.test(contrasena);
-  }
-
-  //Función que permite ingresar a la aplicación. 
-
-  ingresarLogin() {
-    if (this.validaModeloLogin(this.login)) {
-      if (!this.validaNombreUsuario(this.login.nombreLogin)) {
-        this.presentToast("top", "El nombre de usuario debe tener al menos 3 caracteres");
-      } else if (!this.validaContrasena(this.login.contrasenaLogin)) {
-        this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
-      } else {
-        // Simulamos recibir un token desde el servidor
-        const tokenSimulado = 'mi-token-de-autenticacion';
-        
-        // Guardamos el token en localStorage usando el servicio de autenticación
-        this.authlocal.gInicioSesion(tokenSimulado);
-
-        // Navegamos al home
-        this.router.navigate(['/home']);
-        this.presentToast("top", "Bienvenido ");
-      }
+  async login (){
+    if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
+      this.presentToast("top", "Correo no válido");
+    } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
+      this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
     } else {
-      this.presentToast("top", "Faltan datos por completar");
+      const loading = await this.loadingCtrl.create({
+        duration:3000
+      });
+      await loading.present();
+      const user = await this.authService.loginUser(this.loginForm.value.correoLogin, this.loginForm.value.contrasenaLogin).catch((error) =>{
+        console.log(error);
+        loading.dismiss()
+      })
+
+      if (user){
+        loading.dismiss()
+        this.router.navigate(['/home'])
+      }else{
+        console.log('Ingrese datos correctos')
+        this.presentToast("top", "Correo o contraseña no válida");
+
+      }
     }
+
   }
-
-  // Función de navegación 
-
   redirigeContrasena() {
     this.router.navigate(['/recupera-contrasena']);
   }
@@ -125,4 +106,55 @@ export class LoginPage implements OnInit, AfterViewInit {
 
     this.animation.play();
   }
+
+
+  validaCorreoLogin(correo: string): boolean {
+    const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Expresión regular para validar correo
+    return patron.test(correo);
+  
+  }
+
+  // Validación que la contraseña tenga almenos una letra mayúscula y una extensión de 6 caracteres. 
+  validaContrasena(contrasena: string): boolean {
+    const patronMayuscula = /[A-Z]/; 
+    return contrasena.length >= 6 && patronMayuscula.test(contrasena);
+  }
+
+
+
+  ngAfterViewInit() {
+    this.createAnimation();
+  }
+
+
+ /*
+
+  //Función que permite ingresar a la aplicación. 
+
+  ingresarLogin() {
+    if (this.validaModeloLogin(this.login)) {
+      if (!this.validaNombreUsuario(this.loginForm.value.nombreLogin)) {
+        this.presentToast("top", "El nombre de usuario debe tener al menos 3 caracteres");
+      } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
+        this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
+      } else {
+        // Simulamos recibir un token desde el servidor
+        //const tokenSimulado = 'mi-token-de-autenticacion';
+        
+        // Guardamos el token en localStorage usando el servicio de autenticación
+        //this.authlocal.gInicioSesion(tokenSimulado);
+
+        // Navegamos al home
+        this.loginFirebase.login(this.login.nombreLogin, this.login.contrasenaLogin).then(()=>{
+          this.router.navigate(['/home'])
+          this.presentToast("top", "Bienvenido ");
+        })
+       
+      }
+    } else { 
+      this.presentToast("top", "Faltan datos por completar");
+    }
+  }
+*/
+
 }

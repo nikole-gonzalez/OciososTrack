@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "340150748318",
+    "project_id": "ociosostrack",
+    "storage_bucket": "ociosostrack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340150748318:android:79991eed72b66b1bac678f",
+        "android_client_info": {
+          "package_name": "ociosos_track.firefase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjDdPLYG9vXsBBy54jmx_dsexYK7REIGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
