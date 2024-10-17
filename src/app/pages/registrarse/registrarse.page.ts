@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { FirebaseLoginService } from 'src/app/services/firebase-login.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -8,33 +10,57 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./registrarse.page.scss'],
 })
 export class RegistrarsePage implements OnInit {
+  regForm: FormGroup;
 
-
-  registro={
-    nombreUsuarioReg: "",
-    correoReg: "",
-    contrasenaReg: "",
-    contrasenaRepetidaReg: "" 
-  };
-
-  campos: string=""; 
-
-  constructor( private router: Router, private toastController: ToastController) { }
+  constructor( private router: Router, public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public authService: FirebaseLoginService, private toastController: ToastController) { }
 
   ngOnInit() {
+    this.regForm = this.formBuilder.group({
+      nombreUsuarioReg: "",
+      correoReg: "",
+      contrasenaReg: "",
+      contrasenaRepetidaReg: "" 
+    })
   }
 
-  validaModeloRegistro(model: any): boolean {
-    for (const [key, value] of Object.entries(model)) {
-      if (value === "") {
-        this.campos = key;
-        return false;
+  get errorControl(){
+    return this.regForm.controls;
+  }
+
+  async signUp (){
+      if(!this.validaNombreUsuarioReg(this.regForm.value.nombreUsuarioReg)) {
+      this.presentToast("top", "El nombre de usuario debe tener al menos 3 caracteres");
+    } else if (!this.validaCorreoReg(this.regForm.value.correoReg)){
+      this.presentToast("top", "Correo no válido")
+    } else if (!this.validaContrasenaReg1(this.regForm.value.contrasenaReg)) {
+      this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
+    }else if (!this.validaContrasenaReg2(this.regForm.value.contrasenaRepetidaReg)) {
+      this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
+    } else if (this.regForm.value.contrasenaReg !== this.regForm.value.contrasenaRepetidaReg) {
+      this.presentToast("top", "La contraseñas contraseñas deben ser iguales");
+    } else {
+      const loading = await this.loadingCtrl.create({
+        duration:3000
+      })    
+      await loading.present();
+      const user = await this.authService.registerUser(this.regForm.value.correoReg, this.regForm.value.contrasenaReg).catch((error) =>{
+        console.log(error);
+        loading.dismiss()
+      })
+
+      if (user){
+        loading.dismiss()
+        this.router.navigate(['/home'])
+      }else{
+        console.log('Ingrese datos correctos')
+        this.presentToast("top", "Faltan campos por rellenar");
+
       }
     }
-    return true;
+
   }
 
-    // Validación que el nombre tenga más de 3 caracteres 
+   // Validación que el nombre tenga más de 3 caracteres 
     validaNombreUsuarioReg(nombre: string): boolean {
       return nombre.length >= 3;
     }
@@ -58,29 +84,6 @@ export class RegistrarsePage implements OnInit {
     return patron.test(correo);
   }
 
-
-    
-    registraUsuario() {
-      if (this.validaModeloRegistro(this.registro)) {
-        if (!this.validaNombreUsuarioReg(this.registro.nombreUsuarioReg)) {
-          this.presentToast("top", "El nombre de usuario debe tener al menos 3 caracteres");
-        } else if (!this.validaCorreoReg(this.registro.correoReg)){
-          this.presentToast("top", "Correo no válido")
-        } else if (!this.validaContrasenaReg1(this.registro.contrasenaReg)) {
-          this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
-        }else if (!this.validaContrasenaReg2(this.registro.contrasenaRepetidaReg)) {
-          this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
-        } else if (this.registro.contrasenaReg !== this.registro.contrasenaRepetidaReg) {
-          this.presentToast("top", "La contraseñas contraseñas deben ser iguales");
-        } else {
-          this.router.navigate(['/login']);
-        }
-      } else {
-        this.presentToast("top", "Faltan datos por completar");
-      }
-    }
-
-
     async presentToast(position: 'top' | 'middle' | 'bottom', mensajeToast: string) {
       const toast = await this.toastController.create({
         message: mensajeToast,
@@ -90,9 +93,5 @@ export class RegistrarsePage implements OnInit {
   
       await toast.present();
     }
-  
-
-
-
 
 }

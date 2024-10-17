@@ -16,21 +16,22 @@
     </ion-card-header>
   
     <ion-card-content>
-      
+      <form [formGroup]="regForm">
       <ion-item>
-        <ion-input label=" Nombre de Usuario" labelPlacement="stacked" placeholder="Nombre de usuario" [(ngModel)]="registro.nombreUsuarioReg"></ion-input>
+        <ion-input formControlName="nombreUsuarioReg" label=" Nombre de Usuario" labelPlacement="stacked" placeholder="Nombre de usuario"> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Correo electrónico"  type="email" labelPlacement="stacked" placeholder="Correo electrónico" [(ngModel)]="registro.correoReg"></ion-input>
+        <ion-input formControlName ="correoReg" label="Correo electrónico"  type="email" labelPlacement="stacked" placeholder="Correo electrónico"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña" [(ngModel)]="registro.contrasenaReg"></ion-input>
+        <ion-input formControlName = "contrasenaReg" label="Contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Repita su contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña" [(ngModel)]="registro.contrasenaRepetidaReg"></ion-input>
+        <ion-input formControlName ="contrasenaRepetidaReg" label="Repita su contraseña" type="password" labelPlacement="stacked" placeholder="Contraseña"></ion-input>
       </ion-item>
       <br>
-      <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="registraUsuario()">Crear cuenta</ion-button>
+      <ion-button id = "botonIngresar"class="btn-block" expand="block" (click)="signUp()">Crear cuenta</ion-button>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
