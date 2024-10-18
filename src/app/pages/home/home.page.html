@@ -28,27 +28,27 @@
   <ion-button (click)="gcerrarSesion()">Cerrar sesión</ion-button>
 </ion-content>
 
-<!-- Tabs que deben contener un ion-router-outlet -->
-<ion-tabs>
-  <ion-router-outlet></ion-router-outlet> <!-- Aquí se cargan las rutas hijas como cuenta, sugerencias, etc. -->
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="cuenta">
+<ion-footer>
+  <!--Tab pestañas con ion-segment-->
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="usuario">
       <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Cuenta</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="sugerencias">
+    </ion-segment-button>
+    <ion-segment-button value="sugerencias">
       <ion-icon name="sparkles-outline"></ion-icon>
-      <ion-label>Sugerencias</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="configuracion">
+    </ion-segment-button>
+    <ion-segment-button value="configuracion">
       <ion-icon name="cog-outline"></ion-icon>
-      <ion-label>Configuración</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>
+
+
+
 
 <!-- Fab button solo cuando estás en la página home -->
 <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px" *ngIf="esHomeRuta()">
