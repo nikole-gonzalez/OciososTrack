@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Sug1Service } from './services/sug1.service';
 
 
+import { AngularFireModule} from '@angular/fire/compat';
+import { AngularFireAuthModule} from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
+
 
 
 export function playerFactory() {
@@ -25,7 +29,7 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFireAuthModule],
   providers: [provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
   }), provideHttpClient(), Sug1Service],

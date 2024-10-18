@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
+import { UsuarioComponent } from 'src/app/components/usuario/usuario.component';
+import { SugerenciasComponent } from 'src/app/components/sugerencias/sugerencias.component';
+import { ConfiguracionComponent } from 'src/app/components/configuracion/configuracion.component';
 
 const routes: Routes = [
   {
@@ -8,16 +11,16 @@ const routes: Routes = [
     component: HomePage
     /*children: [
       {
-        path: 'cuenta',
-        loadChildren: () => import('./../../pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
+        path: 'usuario',
+        component: UsuarioComponent
       },
       {
         path: 'sugerencias',
-        loadChildren: () => import('./../../pages/sugerencias/sugerencias.module').then( m => m.SugerenciasPageModule)
+        component: SugerenciasComponent
       },
       {
         path: 'configuracion',
-        loadChildren: () => import('./../../pages/configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
+        component: ConfiguracionComponent
       },
       {
         path: '',
