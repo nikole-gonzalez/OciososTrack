@@ -5,8 +5,8 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage,
-    children: [
+    component: HomePage
+    /*children: [
       {
         path: 'cuenta',
         loadChildren: () => import('./../../pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
@@ -24,7 +24,7 @@ const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
       }
-    ]
+    ]*/
   }
 ];
 
