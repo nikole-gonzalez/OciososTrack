@@ -37,4 +37,11 @@ export class HomePage {
   esHomeRuta(): boolean {
     return this.router.url === '/home';
   }
+
+  segmentChanged($event:any){
+    console.log($event);
+    let direccion = $event.detail.value;
+    this.router.navigate(['home/'+direccion])
+  }
+
 }
