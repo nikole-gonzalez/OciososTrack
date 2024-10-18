@@ -8,8 +8,8 @@ import { ConfiguracionComponent } from 'src/app/components/configuracion/configu
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
-    /*children: [
+    component: HomePage,
+    children: [
       {
         path: 'usuario',
         component: UsuarioComponent
@@ -27,7 +27,7 @@ const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
       }
-    ]*/
+    ]
   }
 ];
 
