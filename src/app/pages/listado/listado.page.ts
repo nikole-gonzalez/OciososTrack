@@ -18,5 +18,11 @@ export class ListadoPage implements OnInit {
   }
 
   ngOnInit() { }
+  
+  segmentChanged($event:any){
+    console.log($event);
+    let direccion = $event.detail.value;
+    this.router.navigate(['home/'+direccion])
+  }
 
 }

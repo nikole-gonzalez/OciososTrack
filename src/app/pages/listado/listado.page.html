@@ -31,7 +31,7 @@
 
   <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
-    <ion-fab-button>
+    <ion-fab-button [routerLink]="['/registrolibros']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -39,23 +39,20 @@
 
 
 <!--Tab-->
-<ion-tab-bar slot="bottom">
-  <ion-tab-button tab="home">
-    <ion-icon name="person-outline"></ion-icon>
-    Cuenta
-  </ion-tab-button>
-
-  <ion-tab-button tab="search">
-    <ion-icon name="search"></ion-icon>
-    Buscar
-  </ion-tab-button>
-
-  <ion-tab-button tab="library">
-    <ion-icon name="cog-outline"></ion-icon>
-    Configuración
-  </ion-tab-button>
-</ion-tab-bar>
-</ion-tabs>
+<ion-footer>
+  <!-- Tab pestañas con ion-segment -->
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="usuario">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="sugerencias">
+      <ion-icon name="sparkles-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="configuracion">
+      <ion-icon name="cog-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>
 
 
 
