@@ -43,7 +43,7 @@ export class LoginPage implements OnInit, AfterViewInit {
     if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
       this.presentToast("top", "Correo no válido");
     } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
-      this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
+      this.presentToast("top", "La contraseña no coincide");
     } else {
       const loading = await this.loadingCtrl.create({
         duration:3000
