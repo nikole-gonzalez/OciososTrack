@@ -4,36 +4,45 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Solo muestra el contenido de las categorías cuando estamos en la ruta principal de home -->
-<ion-content [fullscreen]="true" *ngIf="esHomeRuta()" style="--padding-top: 0; --background: rgb(246, 244, 235);">
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6>
-        <ion-card (click)="ingresarListadoLibros()" style="--padding-top: 0;" class="shadow-pop-tr">
-          <img alt="img libros home" src="assets/Imagenes/Libroshome.webp" />
-          <ion-card-header>
-            <ion-card-title>Libros</ion-card-title>
-          </ion-card-header>
-        </ion-card>
+<!-- Un solo ion-content -->
+<ion-content [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
+  <ng-container *ngIf="esHomeRuta(); else routerOutlet">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-card (click)="ingresarListadoLibros()" style="--padding-top: 0;" class="shadow-pop-tr">
+            <img alt="img libros home" src="assets/Imagenes/Libroshome.webp" />
+            <ion-card-header>
+              <ion-card-title>Libros</ion-card-title>
+            </ion-card-header>
+          </ion-card>
 
-        <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class="shadow-pop-tr">
-          <img alt="img series home" src="assets/Imagenes/serieshome.jpg" />
-          <ion-card-header>
-            <ion-card-title>Series</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-button (click)="gcerrarSesion()">Cerrar sesión</ion-button>
-</ion-content>
+          <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class="shadow-pop-tr">
+            <img alt="img series home" src="assets/Imagenes/serieshome.jpg" />
+            <ion-card-header>
+              <ion-card-title>Series</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="gcerrarSesion()">Cerrar sesión</ion-button>
+  </ng-container>
 
-<ion-content>
-  <ion-router-outlet></ion-router-outlet>
+  <ng-template #routerOutlet>
+    <ion-router-outlet></ion-router-outlet>
+  </ng-template>
+
+  <!-- Fab button solo cuando estás en la página home -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px" *ngIf="esHomeRuta()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
 
 <ion-footer>
-  <!--Tab pestañas con ion-segment-->
+  <!-- Tab pestañas con ion-segment -->
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button value="usuario">
       <ion-icon name="person-outline"></ion-icon>
@@ -50,9 +59,3 @@
 
 
 
-<!-- Fab button solo cuando estás en la página home -->
-<ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px" *ngIf="esHomeRuta()">
-  <ion-fab-button>
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
