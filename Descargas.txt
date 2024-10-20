@@ -1,3 +1,5 @@
 npm install @angular/fire firebase
 npm install @angular/fire
+npm install @capacitor/camera
+npm install @ionic/pwa-elements
 
