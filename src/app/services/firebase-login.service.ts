@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-
+import { User} from 'firebase/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,15 @@ export class FirebaseLoginService {
     async signOut (){
       return await this.ngFireAuth.signOut()
     }
-  
+
     async getProfile (){
       return await this.ngFireAuth.currentUser
     }
+
+
   
-   
-  }
+
+    }
+  
 
 

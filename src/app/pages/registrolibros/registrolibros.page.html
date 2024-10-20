@@ -19,29 +19,34 @@
       
       <ion-item>
         <ion-label position="floating">IMAGEN: </ion-label>
-        <ion-input type="img"></ion-input>
-      </ion-item>
-      
+        <ion-input [(ngModel)]="imagenLibroURL" type="img"></ion-input>
+      </ion-item> 
+                
       <ion-item>
         <ion-label position="floating">Título: </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="tituloLibro"  type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Autor: </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="autorLibro" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Comentario: </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="comentarioLibro" type="area"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Valoración: </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="valoracionLibro"type="text"></ion-input>
       </ion-item>
 
-      <ion-button> Guardar Libro </ion-button>
+      <ion-item>
+        <ion-label position="floating">Foto: </ion-label>
+        <ion-input [(ngModel)]="fotoCamaraLibro" type="img"></ion-input>
+      </ion-item> 
+
+      <ion-button (click)="agregarLibros()"> Guardar Libro </ion-button>
 
     </ion-card-content>
