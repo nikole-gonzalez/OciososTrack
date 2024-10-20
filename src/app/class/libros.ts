@@ -6,7 +6,7 @@ export class Libros {
     autorLibro: string;
     comentarioLibro: string;
     valoracionLibro: number;
-    fotoCamaraLibro?: string; 
+    fotoCamaraLibro?: string | undefined = "";
 
 
     constructor(imagenLibroURL: string, tituloLibro: string, autorLibro: string, comentarioLibro: string, valoracionLibro: number, fotoCamaraLibro: string, idLibro?: string) {

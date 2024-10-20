@@ -39,7 +39,8 @@ export function playerFactory() {
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), 
     AngularFireAuthModule, 
-    AngularFirestoreModule],
+    AngularFirestoreModule,
+    ],
   providers: [provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
   }), provideHttpClient(), 

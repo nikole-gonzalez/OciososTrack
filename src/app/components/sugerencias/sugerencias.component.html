@@ -1,18 +1,30 @@
-<ion-header class="ion-no-border" >
-  <ion-toolbar style="--background: rgb(246, 244, 235);">
+<ion-header [translucent]="true">
+  <ion-toolbar>
 
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/home.page"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Sugerencias</ion-title>
+    <ion-title>100 mejores películas</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
- 
-  <ion-title>
-    Top 100 películas
-  </ion-title>
-  
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ion-card *ngFor="let pelicula of peliculas">
+    <ion-card-header>
+      {{pelicula.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          {{pelicula.rank}}
+        </ion-item>
+        <ion-item>
+          {{pelicula.year}}
+        </ion-item>
+        <ion-item>
+          <img [src]="pelicula.image" alt="Imagen de la película">
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

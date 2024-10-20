@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Libros } from '../class/libros';
 import { FirebaseLoginService } from './firebase-login.service';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +12,16 @@ import { FirebaseLoginService } from './firebase-login.service';
 export class FirebaseOciososService {
 
   private coleccionLibros ='libros';
+  private storage = getStorage (initializeApp(environment.firebaseConfig));
 
   constructor(private firestore: AngularFirestore, private firebaseLogin: FirebaseLoginService) { }
+
+  // Método para subir una imagen al storage
+  async subirImagenYObtenerURL(foto: string, nombre: string): Promise<string> {
+    const storageRef = ref(this.storage, `libros/${nombre}`);
+    await uploadString(storageRef, foto, 'data_url');
+    return await getDownloadURL(storageRef);
+  }
 
   //Obtengo todos los libros 
   getLibros() {
@@ -38,6 +49,6 @@ export class FirebaseOciososService {
     return this.firestore.collection(this.coleccionLibros).doc(id).delete();
 
   }
-
-
 }
+
+

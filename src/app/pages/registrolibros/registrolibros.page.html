@@ -18,7 +18,7 @@
     <ion-card-content>
       
       <ion-item>
-        <ion-label position="floating">IMAGEN: </ion-label>
+        <ion-label position="floating">IMAGEN URL: </ion-label>
         <ion-input [(ngModel)]="imagenLibroURL" type="img"></ion-input>
       </ion-item> 
                 
@@ -43,9 +43,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Foto: </ion-label>
-        <ion-input [(ngModel)]="fotoCamaraLibro" type="img"></ion-input>
-      </ion-item> 
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="fotoCamaraLibro" type="text"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+      </ion-item>
 
       <ion-button (click)="agregarLibros()"> Guardar Libro </ion-button>
 
