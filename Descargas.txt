@@ -1,0 +1,3 @@
+npm install @angular/fire firebase
+npm install @angular/fire
+
