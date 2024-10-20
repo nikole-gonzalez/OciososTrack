@@ -47,9 +47,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
   {
+    path: 'registrolibros',
+    loadChildren: () => import('./pages/registrolibros/registrolibros.module').then( m => m.RegistrolibrosPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
+
   
 
   
