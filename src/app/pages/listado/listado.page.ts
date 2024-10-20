@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Libros } from 'src/app/class/libros';
+import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.service';
 
 @Component({
   selector: 'app-listado',
@@ -9,7 +11,9 @@ import { Router } from '@angular/router';
 
 export class ListadoPage implements OnInit {
 
-  constructor( private router: Router) {}
+  libros: Libros [] = [];
+
+  constructor( private router: Router, public firebaseOciososService: FirebaseOciososService) {}
 
   // Función navegación entre páginas 
   
@@ -17,8 +21,29 @@ export class ListadoPage implements OnInit {
     this.router.navigate(['/orgullo'])
   }
 
-  ngOnInit() { }
-  
+  ngOnInit() {
+     // Obtener libros al iniciar la página
+    this.firebaseOciososService.getLibros().subscribe(libros => {
+    this.libros = libros;
+      });
+    }
+
+   
+
+ /*    // Navegar a la página de edición/modificación de un libro
+  editarLibro(libro: Libros) {
+    this.router.navigate(['/editar-libro', libro.idLibro]);
+  } */
+
+  eliminarLibro(idLibro: string) {
+    this.firebaseOciososService.eliminarLibro(idLibro).then(() => {
+      console.log('Libro eliminado con éxito');
+    }).catch(error => {
+      console.error('Error al eliminar el libro: ', error);
+    });
+  }
+
+
   segmentChanged($event:any){
     console.log($event);
     let direccion = $event.detail.value;
