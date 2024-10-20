@@ -38,6 +38,7 @@ export class RegistrolibrosPage implements OnInit {
     this.firebaseOciososService.agregarLibros(NUEVOLIBRO).then(()=> {
       console.log('Libro agregado con éxito')
       this.presentToast('top', "Libro agregado con éxito");
+      this.limpiarFormulario;
       this.router.navigate(['/listado']);
 
       }).catch(error => {
@@ -54,6 +55,15 @@ export class RegistrolibrosPage implements OnInit {
       position: position
     });
     toast.present();
+  }
+
+  limpiarFormulario() {
+    this.imagenLibroURL = "";
+    this.tituloLibro = "";
+    this.autorLibro = "";
+    this.comentarioLibro = "";
+    this.valoracionLibro = 0;
+    this.fotoCamaraLibro = "";
   }
 
 

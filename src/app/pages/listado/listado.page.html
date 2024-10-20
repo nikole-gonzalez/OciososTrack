@@ -10,25 +10,30 @@
 </ion-header>
 
 <!--Cards contenido de libros-->
-<ion-tabs>
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
-  <ion-card (click)="ingresaraorgullo()">
+  <ion-card *ngFor="let libro of libros">  
     <ion-card-header>
-      <ion-card-title>Mis libros</ion-card-title>
+      <ion-card-title>{{libro.tituloLibro}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img alt="img Orgullo y prejuicio" src="assets/Imagenes/Orgullo y prejuicio.jpeg" />
+            <img [src]="libro.imagenLibroURL" alt="Imagen del libro" />
           </ion-thumbnail>
-          <ion-label>Orgullo y prejuicio </ion-label>
+          <ion-label>{{ libro.autorLibro }} </ion-label>
         </ion-item>
-       
+        <ion-item>
+          <ion-label>Valoración: {{ libro.valoracionLibro }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Comentario: {{ libro.comentarioLibro }}</ion-label>
+        </ion-item>
+        <ion-button (click)="editarLibro(libro)">Editar</ion-button>
+        <ion-button color="danger" (click)="eliminarLibro(libro.idLibro)">Eliminar</ion-button>
       </ion-list>
     </ion-card-content>
-  </ion-card> 
-
+  </ion-card>
   <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
     <ion-fab-button [routerLink]="['/registrolibros']">

@@ -32,11 +32,18 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule,
-     AngularFireModule.initializeApp(environment.firebaseConfig), AngularFireAuthModule, AngularFirestoreModule],
+  imports: [BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    IonicStorageModule.forRoot(), 
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), 
+    AngularFireAuthModule, 
+    AngularFirestoreModule],
   providers: [provideLottieOptions({
     player: () => import('lottie-web'), // Importación asíncrona de Lottie
-  }), provideHttpClient(), Sug1Service,
+  }), provideHttpClient(), 
+  Sug1Service,
   provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
   provideFirestore(()=> getFirestore())],
   bootstrap: [AppComponent],

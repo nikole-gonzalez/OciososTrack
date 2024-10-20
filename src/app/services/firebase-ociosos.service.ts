@@ -23,6 +23,7 @@ export class FirebaseOciososService {
       // Una vez que Firebase genera el ID, lo asignamos al libro
       const idGenerado = docRef.id;
       this.firestore.collection('libros').doc(idGenerado).update({ idLibro: idGenerado });
+     
     });
   }
 
