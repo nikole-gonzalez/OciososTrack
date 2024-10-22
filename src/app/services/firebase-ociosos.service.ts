@@ -5,6 +5,7 @@ import { FirebaseLoginService } from './firebase-login.service';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,33 @@ export class FirebaseOciososService {
 
   private coleccionLibros ='libros';
   private storage = getStorage (initializeApp(environment.firebaseConfig));
+  userId: any;
 
-  constructor(private firestore: AngularFirestore, private firebaseLogin: FirebaseLoginService) { }
+  constructor(private firestore: AngularFirestore, private firebaseLogin: FirebaseLoginService) {
+    this.firebaseLogin.getProfile().then(user=> {
+      this.userId = user?.uid
+      console.log(this.userId)
+    })
+   }
+
+   //Obtengo todos los libros 
+   getLibros(): Observable<Libros[]> {
+    return this.firestore.collection<Libros>(this.coleccionLibros, ref => 
+      ref.where('userId', '==', this.userId)
+    ).valueChanges({ idField: 'idLibros' });
+  }
+
+
+  
+   /*getLibros(): Observable<Libros[]> {
+    if (!this.userId) {
+      return of([]); // Devuelve un Observable vacío si no hay userId
+    }
+    return this.firestore.collection<Libros>(this.coleccionLibros, ref => 
+      ref.where('userId', '==', this.userId)
+    ).valueChanges({ idField: 'idLibros' });
+  }*/
+  
 
   // Método para subir una imagen al storage
   async subirImagenYObtenerURL(foto: string, nombre: string): Promise<string> {
@@ -23,32 +49,46 @@ export class FirebaseOciososService {
     return await getDownloadURL(storageRef);
   }
 
-  //Obtengo todos los libros 
-  getLibros() {
-    return this.firestore.collection<Libros>(this.coleccionLibros).valueChanges({idField: 'idLibros'});
-
-  }
+  
+    
   // Agregar libros
   agregarLibros(libro: Libros) {
-    return this.firestore.collection('libros').add({...libro}).then(docRef => {
-      // Una vez que Firebase genera el ID, lo asignamos al libro
-      const idGenerado = docRef.id;
-      this.firestore.collection('libros').doc(idGenerado).update({ idLibro: idGenerado });
-     
+    if (this.userId) {
+      const libroConUserId = { ...libro, userId: this.userId };
+      return this.firestore.collection('libros').add(libroConUserId).then(docRef => {
+        const idGenerado = docRef.id;
+        return this.firestore.collection('libros').doc(idGenerado).update({ idLibro: idGenerado });
+      });
+    } else {
+      return Promise.reject('No se encontró UserId');
+    }
+  }
+
+  
+  // Modifico información del libro
+  actualizarLibro(idLibro: string, libro: Libros) {
+    return this.firestore.collection('libros').doc(idLibro).update({
+      tituloLibro: libro.tituloLibro,
+      imagenLibroURL: libro.imagenLibroURL,
+      autorLibro: libro.autorLibro,
+      comentarioLibro: libro.comentarioLibro,
+      valoracionLibro: libro.valoracionLibro,
+      fotoCamaraLibro: libro.fotoCamaraLibro
     });
   }
 
-  // Modifico información del libro
-  actualizarLibro(libro:Libros){
-    return this.firestore.collection(this.coleccionLibros).doc(libro.idLibro).update({...libro});
-
-  }
+  
   
   // Elimino libro
   eliminarLibro(id: string){
     return this.firestore.collection(this.coleccionLibros).doc(id).delete();
 
   }
-}
 
+
+// Obtener un libro por su ID
+getLibroById(idLibro: string): Observable<Libros> {
+  return this.firestore.collection('libros').doc(idLibro).valueChanges() as Observable<Libros>;
+}
+}
 

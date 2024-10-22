@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Libros } from 'src/app/class/libros';
+import { FirebaseLoginService } from 'src/app/services/firebase-login.service';
 import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.service';
 
 @Component({
@@ -11,22 +12,30 @@ import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.servic
 
 export class ListadoPage implements OnInit {
 
+  userId: any;
   libros: Libros [] = [];
 
-  constructor( private router: Router, public firebaseOciososService: FirebaseOciososService) {}
-
-  // Función navegación entre páginas 
+  constructor( private router: Router, public firebaseOciososService: FirebaseOciososService, private authService: FirebaseLoginService) {}
   
-  ingresaraorgullo(){
-    this.router.navigate(['/orgullo'])
+  async ngOnInit() {
+    const user = await this.authService.getProfile();
+    this.userId = user?.uid;
+  
+    if (this.userId) {
+      this.cargarLibros();
+    } else {
+      console.error('No se encontró el userId');
+    }
   }
-
-  ngOnInit() {
-     // Obtener libros al iniciar la página
+  
+  cargarLibros(){
     this.firebaseOciososService.getLibros().subscribe(libros => {
     this.libros = libros;
-      });
-    }
+      console.log(libros)      
+  }, error =>{
+    console.error('Error al obtener los libros')
+  });
+}
 
    
 
@@ -51,3 +60,6 @@ export class ListadoPage implements OnInit {
   }
 
 }
+
+
+
