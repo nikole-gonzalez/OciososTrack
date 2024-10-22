@@ -45,11 +45,16 @@ export class FirebaseLoginService {
     }
 
     async getProfile (){
-      return await this.ngFireAuth.currentUser
-    }
-
-
-  
+      return new Promise <User | null> ((resolve, reject)=>{
+        this.ngFireAuth.onAuthStateChanged(user =>{
+          if (user) {
+            resolve (user as User) 
+          }else{
+            resolve(null)
+          }
+        }, reject)
+      })
+    } 
 
     }
   

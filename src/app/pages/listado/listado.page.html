@@ -11,6 +11,7 @@
 
 <!--Cards contenido de libros-->
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ng-container *ngIf="libros.length > 0">
   <ion-card *ngFor="let libro of libros">  
     <ion-card-header>
       <ion-card-title style="font-size: large;">{{libro.tituloLibro}}</ion-card-title>
@@ -39,6 +40,8 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+  </ng-container>
+
   <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
     <ion-fab-button [routerLink]="['/registrolibros']">
