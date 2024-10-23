@@ -9,8 +9,6 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 defineCustomElements(window);
 
 
-
-
 @Component({
   selector: 'app-registrolibros',
   templateUrl: './registrolibros.page.html',

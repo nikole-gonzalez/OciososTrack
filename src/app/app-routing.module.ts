@@ -51,9 +51,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrolibros/registrolibros.module').then( m => m.RegistrolibrosPageModule)
   },
   {
+    path: 'editarlibros/:idLibro',
+    loadChildren: () => import('./pages/editarlibros/editarlibros.module').then( m => m.EditarlibrosPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
+
 
   
 
