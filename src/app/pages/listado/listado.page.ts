@@ -37,7 +37,21 @@ export class ListadoPage implements OnInit {
   });
 }
 
-   
+  //editarLibro(libro: Libros) {
+    //if (libro.idLibro) {
+      //this.router.navigate(['/editarlibros', libro.idLibro]);
+    //} else {
+      //console.error('Error: No se encontró el ID del libro.');
+    //}
+  //}
+
+  editarLibro(idLibro: string) {
+    if (idLibro) {
+      this.router.navigate(['/editarlibros', idLibro]);  // Navegar a la página de edición con el ID del libro
+    } else {
+      console.error('Error: No se encontró el ID del libro.');
+    }
+  }
 
  /*    // Navegar a la página de edición/modificación de un libro
   editarLibro(libro: Libros) {

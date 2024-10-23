@@ -23,24 +23,13 @@ export class FirebaseOciososService {
     })
    }
 
-   //Obtengo todos los libros 
+   //Obtengo todos los libros por usuario
    getLibros(): Observable<Libros[]> {
     return this.firestore.collection<Libros>(this.coleccionLibros, ref => 
       ref.where('userId', '==', this.userId)
-    ).valueChanges({ idField: 'idLibros' });
+    ).valueChanges({ idField: 'idLibro' });
   }
 
-
-  
-   /*getLibros(): Observable<Libros[]> {
-    if (!this.userId) {
-      return of([]); // Devuelve un Observable vacío si no hay userId
-    }
-    return this.firestore.collection<Libros>(this.coleccionLibros, ref => 
-      ref.where('userId', '==', this.userId)
-    ).valueChanges({ idField: 'idLibros' });
-  }*/
-  
 
   // Método para subir una imagen al storage
   async subirImagenYObtenerURL(foto: string, nombre: string): Promise<string> {
@@ -48,9 +37,7 @@ export class FirebaseOciososService {
     await uploadString(storageRef, foto, 'data_url');
     return await getDownloadURL(storageRef);
   }
-
   
-    
   // Agregar libros
   agregarLibros(libro: Libros) {
     if (this.userId) {
@@ -64,10 +51,24 @@ export class FirebaseOciososService {
     }
   }
 
+
+  // Modifico información del libro
+  
+  //actualizarLibro(idLibro: string, libro: Libros) {
+    //return this.firestore.collection('libros').doc(idLibro).update({
+      //tituloLibro: libro.tituloLibro,
+      //imagenLibroURL : libro.imagenLibroURL,
+      //autorLibro: libro.autorLibro,
+      //comentarioLibro: libro.comentarioLibro,
+      //valoracionLibro: libro.valoracionLibro,
+      //fotoCamaraLibro: libro.fotoCamaraLibro
+    //});
+  //}
+
   
   // Modifico información del libro
-  actualizarLibro(idLibro: string, libro: Libros) {
-    return this.firestore.collection('libros').doc(idLibro).update({
+  actualizarLibro(libro: Libros) {
+    return this.firestore.collection('libros').doc(libro.idLibro).update({
       tituloLibro: libro.tituloLibro,
       imagenLibroURL: libro.imagenLibroURL,
       autorLibro: libro.autorLibro,
@@ -76,15 +77,12 @@ export class FirebaseOciososService {
       fotoCamaraLibro: libro.fotoCamaraLibro
     });
   }
-
-  
-  
+    
   // Elimino libro
   eliminarLibro(id: string){
     return this.firestore.collection(this.coleccionLibros).doc(id).delete();
 
   }
-
 
 // Obtener un libro por su ID
 getLibroById(idLibro: string): Observable<Libros> {
