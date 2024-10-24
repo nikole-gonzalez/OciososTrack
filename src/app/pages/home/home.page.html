@@ -33,14 +33,7 @@
     <ion-router-outlet></ion-router-outlet>
   </ng-template>
 
-  <!-- Fab button solo cuando estás en la página home -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: 100px" *ngIf="esHomeRuta()">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
-
 <ion-footer>
   <!-- Tab pestañas con ion-segment -->
   <ion-segment (ionChange)="segmentChanged($event)">

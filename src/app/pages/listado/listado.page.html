@@ -11,6 +11,7 @@
 
 <!--Cards contenido de libros-->
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ng-container *ngIf="libros.length > 0">
   <ion-card *ngFor="let libro of libros">  
     <ion-card-header>
       <ion-card-title style="font-size: large;">{{libro.tituloLibro}}</ion-card-title>
@@ -34,11 +35,13 @@
             <img [src]="libro.fotoCamaraLibro" alt="Imagen del libro" />
           </ion-thumbnail>
         </ion-item>
-        <ion-button (click)="editarLibro(libro)">Editar</ion-button>
+        <ion-button (click)="editarLibro(libro.idLibro)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarLibro(libro.idLibro)">Eliminar</ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>
+  </ng-container>
+
   <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
     <ion-fab-button [routerLink]="['/registrolibros']">

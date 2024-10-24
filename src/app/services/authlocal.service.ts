@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { FirebaseOciososService } from './firebase-ociosos.service';
+import { FirebaseLoginService } from './firebase-login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthlocalService {
 
-  constructor() { }
+  constructor(private ngFireAuth: FirebaseLoginService ) { }
 
   // Método para iniciar sesión guardando el token en localStorage
 gInicioSesion(token: string): void {
@@ -19,8 +21,9 @@ gInicioSesion(token: string): void {
     }
   
   //Método para cerrar sesión eliminando el token de localStorage
-  gCerrarSesion(): void {
+  async gCerrarSesion(): Promise<void> {
     localStorage.removeItem('token'); // Elimina el token
+    return await this.ngFireAuth.signOut()
     }
   }
 

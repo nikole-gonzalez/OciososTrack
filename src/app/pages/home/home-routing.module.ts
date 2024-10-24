@@ -18,10 +18,10 @@ const routes: Routes = [
         path: 'sugerencias',
         component: SugerenciasComponent
       },
-      {
-        path: 'configuracion',
-        component: ConfiguracionComponent
-      },
+      //{
+        //path: 'configuracion',
+        //component: ConfiguracionComponent
+      //},
       {
         path: '',
         redirectTo: 'home',

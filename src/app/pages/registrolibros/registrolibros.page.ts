@@ -9,8 +9,6 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 defineCustomElements(window);
 
 
-
-
 @Component({
   selector: 'app-registrolibros',
   templateUrl: './registrolibros.page.html',
@@ -24,6 +22,7 @@ export class RegistrolibrosPage implements OnInit {
   comentarioLibro ="";
   valoracionLibro =0;
   fotoCamaraLibro= "";
+  userId ="";
 
 
   constructor( private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router: Router) { }
@@ -44,7 +43,8 @@ export class RegistrolibrosPage implements OnInit {
             this.autorLibro,
             this.comentarioLibro,
             this.valoracionLibro,
-            this.fotoCamaraLibro
+            this.fotoCamaraLibro,
+            this.userId,
           );
   
           this.firebaseOciososService.agregarLibros(nuevoLibro).then(() => {
