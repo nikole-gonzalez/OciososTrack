@@ -11,8 +11,8 @@ export class Sug1Service {
   URLSUG1: string = 'https://imdb-top-100-movies.p.rapidapi.com/';
   
   httpHeader = new HttpHeaders({ 
-    'x-rapidapi-key': 'c01c9f83ebmsh64ba1cce5c802f5p17bc02jsnc8631b2f9526',
-    'x-rapidapi-host': 'imdb-top-100-movies.p.rapidapi.com'
+    //'x-rapidapi-key': 'c01c9f83ebmsh64ba1cce5c802f5p17bc02jsnc8631b2f9526',
+    //'x-rapidapi-host': 'imdb-top-100-movies.p.rapidapi.com'
   });
 
   constructor(private http: HttpClient) { }
