@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, lastValueFrom } from 'rxjs';
 import { Pelicula } from '../class/pelicula';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,11 @@ export class Sug1Service {
     //'x-rapidapi-host': 'imdb-top-100-movies.p.rapidapi.com'
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.storage.create();
+   }
 
-  getPeliculasLista(): Observable<Pelicula[]> {
+  /*getPeliculasLista(): Observable<Pelicula[]> {
     return this.http.get<{ status: string; data: { movies: Pelicula[] } }>(this.URLSUG1, { headers: this.httpHeader }).pipe(
       tap(response => console.log('Response fetched!', response)),
       // Extraer el array de películas de la respuesta
@@ -31,10 +34,43 @@ export class Sug1Service {
       }),
       catchError(this.handleError<Pelicula[]>('Get peliculas', []))
     );
-  }
+  }*/
   getPeliculas2():Observable<any>{
    return this.http.get(this.URLSUG1,{headers: this.httpHeader} )
   }
+
+   getPeliculasLista(): Observable<Pelicula[]> {
+    return this.http.get<{ status: string; data: { movies: Pelicula[] } }>(this.URLSUG1, { headers: this.httpHeader }).pipe(
+      tap(async response => {
+        // Guarda las películas en el almacenamiento local si la API responde
+        await this.storage.set('peliculas', response.data.movies);
+        console.log("Obtiene películas");
+      }),
+      map(response => {
+        if (response.status === 'undefined') {
+          return response.data.movies;
+        } else {
+          throw new Error('Failed to fetch movies');
+        }
+      }),
+      catchError(this.handleError<Pelicula[]>('Get peliculas', []))
+    );
+  }
+
+  async getPeliculasConFallback(): Promise<Pelicula[]> {
+    try {
+      const peliculas = await lastValueFrom(this.http.get<Pelicula[]>(this.URLSUG1, { headers: this.httpHeader }));
+      await this.storage.set('peliculas', peliculas); // Guarda en Storage
+      return peliculas;
+    } catch (error) {
+      console.error('Error al obtener desde API, usando almacenamiento local:', error);
+      const peliculasGuardadas = await this.storage.get('peliculas'); // Obtiene de Storage
+      return peliculasGuardadas || []; // Si no hay datos guardados, retorna un array vacío
+    }
+  }
+
+
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

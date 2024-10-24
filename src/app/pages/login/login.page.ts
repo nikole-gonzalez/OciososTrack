@@ -25,7 +25,8 @@ export class LoginPage implements OnInit, AfterViewInit {
     public loadingCtrl: LoadingController, 
     public authService: FirebaseLoginService, 
     private toastController: ToastController, 
-    private animationController : AnimationController) { }
+    private animationController : AnimationController,
+    private authLocalService: AuthlocalService) { }
 
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class LoginPage implements OnInit, AfterViewInit {
     return this.loginForm.controls;
   }
 
-  async login (){
+  /*async login (){
     if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
       this.presentToast("top", "Correo no válido");
     } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
@@ -64,7 +65,36 @@ export class LoginPage implements OnInit, AfterViewInit {
       }
     }
 
-  }
+  }*/
+
+    async login() {
+      if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
+        this.presentToast("top", "Correo no válido");
+      } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
+        this.presentToast("top", "La contraseña no coincide");
+      } else {
+        const loading = await this.loadingCtrl.create({ duration: 3000 });
+        await loading.present();
+    
+        const token = await this.authService.loginUser(this.loginForm.value.correoLogin, this.loginForm.value.contrasenaLogin).catch((error) => {
+          console.log(error);
+          loading.dismiss();
+          return null;
+        });
+    
+        if (token) {
+          this.authLocalService.gInicioSesion(token); // Guarda el token en AuthlocalService
+          loading.dismiss();
+          this.router.navigate(['/home']);
+        } else {
+          console.log('Ingrese datos correctos');
+          this.presentToast("top", "Correo o contraseña no válida");
+          loading.dismiss();
+        }
+      }
+    }
+    
+
   redirigeContrasena() {
     this.router.navigate(['/recupera-contrasena']);
   }
