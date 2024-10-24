@@ -26,14 +26,19 @@ export class FirebaseLoginService {
   export class AutheticationService{ */
 
     constructor (public ngFireAuth : AngularFireAuth){}
+
     
     async registerUser (email:string, password:string){
       return await this.ngFireAuth.createUserWithEmailAndPassword(email, password)
 
     }
   
-    async loginUser (email:string, password:string){
-      return await this.ngFireAuth.signInWithEmailAndPassword(email, password)
+    async loginUser(email: string, password: string): Promise<string | null> {
+      const userCredential = await this.ngFireAuth.signInWithEmailAndPassword(email, password);
+      if (userCredential.user) {
+        return await userCredential.user.getIdToken(); // Obtiene el token de Firebase
+      }
+      return null;
     }
   
     async resetPassword (email:string){
