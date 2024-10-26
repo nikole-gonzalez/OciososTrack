@@ -7,6 +7,8 @@ import { FirebaseLoginService } from './firebase-login.service';
 })
 export class AuthlocalService {
 
+  
+
   constructor(private ngFireAuth: FirebaseLoginService ) { }
 
   // Método para iniciar sesión guardando el token en localStorage

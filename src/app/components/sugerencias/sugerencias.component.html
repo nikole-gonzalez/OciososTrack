@@ -2,7 +2,9 @@
   <ion-toolbar>
 
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home.page"></ion-back-button>
+      <ion-button (click)="goToHome()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
 
     <ion-title>100 mejores películas</ion-title>

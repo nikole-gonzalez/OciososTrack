@@ -3,10 +3,9 @@
     <ion-title>Tus intereses</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<!-- Un solo ion-content -->
-<ion-content [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
-  <ng-container *ngIf="esHomeRuta(); else routerOutlet">
+<ion-content class="has-header" [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
+  <ng-container *ngIf="esHomeRuta(); else segmentOutlet">
+    <!-- Contenido principal de home -->
     <ion-grid>
       <ion-row>
         <ion-col col-6>
@@ -16,7 +15,6 @@
               <ion-card-title>Libros</ion-card-title>
             </ion-card-header>
           </ion-card>
-
           <ion-card (click)="ingresarListadoSeries()" style="--padding-top: 0;" class="shadow-pop-tr">
             <img alt="img series home" src="assets/Imagenes/serieshome.jpg" />
             <ion-card-header>
@@ -28,14 +26,13 @@
     </ion-grid>
     <ion-button (click)="gcerrarSesion()">Cerrar sesión</ion-button>
   </ng-container>
-
-  <ng-template #routerOutlet>
+  
+  <ng-template #segmentOutlet>
     <ion-router-outlet></ion-router-outlet>
   </ng-template>
-
 </ion-content>
+
 <ion-footer>
-  <!-- Tab pestañas con ion-segment -->
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button value="usuario">
       <ion-icon name="person-outline"></ion-icon>
@@ -48,7 +45,3 @@
     </ion-segment-button>
   </ion-segment>
 </ion-footer>
-
-
-
-
