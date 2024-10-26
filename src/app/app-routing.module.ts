@@ -30,10 +30,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/recupera-contrasena/recupera-contrasena.module').then( m => m.RecuperaContrasenaPageModule)
   },
   {
-    path: 'orgullo',
-    loadChildren: () => import('./pages/orgullo/orgullo.module').then( m => m.OrgulloPageModule)
-  },
-  {
     path: 'listado-series',
     loadChildren: () => import('./pages/listado-series/listado-series.module').then( m => m.ListadoSeriesPageModule)
   },

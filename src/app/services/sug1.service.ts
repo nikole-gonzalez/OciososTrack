@@ -38,7 +38,8 @@ export class Sug1Service {
   getPeliculas2():Observable<any>{
    return this.http.get(this.URLSUG1,{headers: this.httpHeader} )
   }
-
+//ESTE
+/*
    getPeliculasLista(): Observable<Pelicula[]> {
     return this.http.get<{ status: string; data: { movies: Pelicula[] } }>(this.URLSUG1, { headers: this.httpHeader }).pipe(
       tap(async response => {
@@ -57,6 +58,29 @@ export class Sug1Service {
     );
   }
 
+  */
+
+  getPeliculasLista(): Observable<Pelicula[]> {
+    return this.http.get<{ status: string; data: { movies: Pelicula[] } }>(this.URLSUG1, { headers: this.httpHeader }).pipe(
+      tap(async response => {
+        console.log("Response obtenida de la API:", response); // Verifica si la API responde
+        // Guarda las películas en el almacenamiento local si la API responde
+        await this.storage.set('peliculas', response.data.movies);
+        console.log("Películas guardadas en localStorage:", response.data.movies); // Confirma que se guardaron en Storage
+      }),
+      map(response => {
+        if (response.status === 'undefined') {
+          return response.data.movies;
+        } else {
+          throw new Error('Failed to fetch movies');
+        }
+      }),
+      catchError(this.handleError<Pelicula[]>('Get peliculas', []))
+    );
+  }
+//este tambien
+  /*
+
   async getPeliculasConFallback(): Promise<Pelicula[]> {
     try {
       const peliculas = await lastValueFrom(this.http.get<Pelicula[]>(this.URLSUG1, { headers: this.httpHeader }));
@@ -68,7 +92,22 @@ export class Sug1Service {
       return peliculasGuardadas || []; // Si no hay datos guardados, retorna un array vacío
     }
   }
+    */
 
+  async getPeliculasConFallback(): Promise<Pelicula[]> {
+    try {
+      const peliculas = await lastValueFrom(this.http.get<Pelicula[]>(this.URLSUG1, { headers: this.httpHeader }));
+      await this.storage.set('peliculas', peliculas); // Guarda en Storage
+      console.log("Películas obtenidas desde la API y guardadas en localStorage:", peliculas);
+      return peliculas;
+    } catch (error) {
+      console.error('Error al obtener desde API, usando almacenamiento local:', error);
+      const peliculasGuardadas = await this.storage.get('peliculas'); // Obtiene de Storage
+      console.log("Películas obtenidas de localStorage:", peliculasGuardadas); // Verifica si hay datos en Storage
+      return peliculasGuardadas || []; // Si no hay datos guardados, retorna un array vacío
+    }
+  }
+  
 
 
 
