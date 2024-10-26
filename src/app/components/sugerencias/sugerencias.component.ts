@@ -13,9 +13,9 @@ import { Sug1Service } from 'src/app/services/sug1.service';
 export class SugerenciasComponent  implements OnInit {
 
 
-    peliculas: Pelicula[] = []; // Aquí almacenarás la lista de películas
+    peliculas: Pelicula[] = []; // Almacena lista de películas
   
-    constructor(private sug1service : Sug1Service) { }
+    constructor(private sug1service : Sug1Service, private router : Router) { }
   
     async ngOnInit() {
       try {
@@ -26,6 +26,11 @@ export class SugerenciasComponent  implements OnInit {
         console.error('Error al obtener las películas:', error);
       }
     }
+
+    goToHome() {
+      this.router.navigate(['/home']);
+    }
+
   
   }
   
