@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseOciososService } from './firebase-ociosos.service';
 import { FirebaseLoginService } from './firebase-login.service';
-
+import { User } from 'firebase/auth';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +27,9 @@ gInicioSesion(token: string): void {
     localStorage.removeItem('token'); // Elimina el token
     return await this.ngFireAuth.signOut()
     }
+
+ 
+
   }
 
 

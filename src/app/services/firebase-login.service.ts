@@ -1,37 +1,38 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User} from 'firebase/auth';
 import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FirebaseLoginService {
+  User: User | null = null;
 
-  /*constructor(private authfire: AngularFireAuth, private router : Router) { }
+    constructor (public ngFireAuth : AngularFireAuth, private firestore : AngularFirestore){}
 
-  login(correoFire:string, contrasenaFire:string){
-    return this.authfire.signInWithEmailAndPassword(correoFire, contrasenaFire);
-  }
-
-  logout (){
-    return this.authfire.signOut().then(()=>{
-      this.router.navigate(['/login']);
-    })
-
-  } 
-
-  export class AutheticationService{ */
-
-    constructor (public ngFireAuth : AngularFireAuth){}
-
-    
+    //por si
+    /*
     async registerUser (email:string, password:string){
       return await this.ngFireAuth.createUserWithEmailAndPassword(email, password)
 
-    }
+    }*/
+
+      async registerUser(email: string, password: string, nombre: string) {
+        const userCredential = await this.ngFireAuth.createUserWithEmailAndPassword(email, password);
+        if (userCredential.user) {
+          // Guardar información en Firestore
+          await this.firestore.collection('users').doc(userCredential.user.uid).set({
+            nombre,
+            correo: email
+          });
+        }
+        return userCredential;
+      }
   
     async loginUser(email: string, password: string): Promise<string | null> {
       const userCredential = await this.ngFireAuth.signInWithEmailAndPassword(email, password);
@@ -61,7 +62,23 @@ export class FirebaseLoginService {
       })
     } 
 
-    }
+    
+
+  //NUEVO  
+  // Método para obtener la información del usuario autenticado
+  
+  
+  async gObtenerUsuarioActual(): Promise<User | null> {
+    return (await this.ngFireAuth.currentUser) as User | null;
+  }
+
+  async obtenerDatosUsuario(uid: string) {
+    const userDoc = await this.firestore.collection('users').doc(uid).get().toPromise();
+    return userDoc?.data();
+  }
+  
+
+}
   
 
 

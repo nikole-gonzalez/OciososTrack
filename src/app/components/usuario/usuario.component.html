@@ -1,19 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-
-    <ion-buttons slot="start">
-      <ion-button (click)="goToHome()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-title>Cuenta</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content >
-  <p>
-    usuario works!
-  </p>
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ion-card *ngIf="usuario">
+    <ion-card-header>
+      <h2>Información de la Cuenta</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <p>Correo: {{ usuario.correo }}</p> 
+      </ion-item>
+      <ion-item>
+        <p>Nombre: {{ usuario.nombre }}</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
 
