@@ -51,9 +51,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/editarlibros/editarlibros.module').then( m => m.EditarlibrosPageModule)
   },
   {
+    path: 'registrostreaming',
+    loadChildren: () => import('./pages/registrostreaming/registrostreaming.module').then( m => m.RegistrostreamingPageModule)
+  },
+  {
+    path: 'editarstreaming/:idStreaming',
+    loadChildren: () => import('./pages/editarstreaming/editarstreaming.module').then( m => m.EditarstreamingPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
+
 
 
   
