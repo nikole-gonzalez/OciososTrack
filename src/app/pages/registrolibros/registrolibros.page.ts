@@ -82,6 +82,7 @@ export class RegistrolibrosPage implements OnInit {
     this.fotoCamaraLibro = "";
   }
 
+  /*
   async tomarFoto() {
     const image = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
@@ -94,6 +95,31 @@ export class RegistrolibrosPage implements OnInit {
     } else {
       console.error("Error al capturar la imagen");
     }
+  }*/
+
+  async seleccionarImagen(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: source,
+        quality: 100,
+      });
+      if (image.dataUrl) {
+        this.fotoCamaraLibro = image.dataUrl;
+      } else {
+        console.error("Error al obtener la imagen");
+      }
+    } catch (error) {
+      console.error("Error al acceder a la imagen", error);
+    }
+  }
+
+  tomarFoto() {
+    this.seleccionarImagen(CameraSource.Camera);
+  }
+
+  abrirGaleria() {
+    this.seleccionarImagen(CameraSource.Photos);
   }
 
 
