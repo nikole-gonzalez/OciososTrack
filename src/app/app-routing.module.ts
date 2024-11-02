@@ -34,11 +34,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/listado-series/listado-series.module').then( m => m.ListadoSeriesPageModule)
   },
   {
-    path: 'bluey',
-    loadChildren: () => import('./pages/bluey/bluey.module').then( m => m.BlueyPageModule)
-  },
-
-  {
     path: 'registrarse',
     loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
@@ -59,6 +54,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/editarstreaming/editarstreaming.module').then( m => m.EditarstreamingPageModule)
   },
   {
+    path: 'listado-deportes',
+    loadChildren: () => import('./pages/listado-deportes/listado-deportes.module').then( m => m.ListadoDeportesPageModule)
+  },
+  {
+    path: 'editardeporte/:idDeporte',
+    loadChildren: () => import('./pages/editardeporte/editardeporte.module').then( m => m.EditardeportePageModule)
+  },
+  {
+    path: 'registrodeporte',
+    loadChildren: () => import('./pages/registrodeporte/registrodeporte.module').then( m => m.RegistrodeportePageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
@@ -66,7 +73,6 @@ const routes: Routes = [
 
 
   
-
   
   
 ];
