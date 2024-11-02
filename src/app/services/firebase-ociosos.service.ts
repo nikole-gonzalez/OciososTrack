@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { Observable, of } from 'rxjs';
 import { Streaming } from '../class/streaming';
+import { Deportes } from '../class/deportes';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class FirebaseOciososService {
 
   private coleccionLibros ='libros';
   private coleccionStreaming = 'streaming';
+  private coleccionDeportes = 'deportes';
   private storage = getStorage (initializeApp(environment.firebaseConfig));
   userId: any;
 
@@ -124,7 +126,7 @@ getLibroById(idLibro: string): Observable<Libros> {
       const streamingConUserId = { ...streaming, userId: this.userId };
       return this.firestore.collection('streaming').add(streamingConUserId).then(docRef => {
         const idGeneradoStreaming = docRef.id;
-        return this.firestore.collection('streaming').doc(idGeneradoStreaming).update({ idLibro: idGeneradoStreaming });
+        return this.firestore.collection('streaming').doc(idGeneradoStreaming).update({ idStreaming: idGeneradoStreaming });
       });
     } else {
       return Promise.reject('No se encontró UserId');
@@ -146,6 +148,61 @@ getLibroById(idLibro: string): Observable<Libros> {
   // Obtener un streaming por su ID
   getStreamingById(idStreaming: string): Observable<Streaming> {
     return this.firestore.collection('streaming').doc(idStreaming).valueChanges() as Observable<Streaming>;
+  }
+
+  //--------DEPORTES--------//
+
+
+ //Obtengo todos los Deportes por usuario
+ getDeportes(): Observable<Deportes[]> {
+  return this.firestore.collection<Deportes>(this.coleccionDeportes, ref => 
+    ref.where('userId', '==', this.userId)
+  ).valueChanges({ idField: 'idDeporte' });
+}
+
+  // Elimino Deporte
+  eliminarDeporte(id: string){
+    return this.firestore.collection(this.coleccionDeportes).doc(id).delete();
+
+  }
+
+  
+  // Método para subir una imagen al storage de Deporte
+  async subirImagenYObtenerURLDeportes(foto: string, nombre: string): Promise<string> {
+    const storageRefDeporte = ref(this.storage, `deporte/${nombre}`);
+    await uploadString(storageRefDeporte, foto, 'data_url');
+    return await getDownloadURL(storageRefDeporte);
+  }
+
+  // Agregar Deporte
+  agregarDeporte(deporte : Deportes) {
+    if (this.userId) {
+      const deporteConUserId = { ...deporte, userId: this.userId };
+      return this.firestore.collection('deportes').add(deporteConUserId).then(docRef => {
+        const idGeneradoDeporte = docRef.id;
+        return this.firestore.collection('deportes').doc(idGeneradoDeporte).update({ idDeporte: idGeneradoDeporte });
+      });
+    } else {
+      return Promise.reject('No se encontró UserId');
+    }
+  }
+
+  // Modifico información del streaming
+  actualizarDeporte(deporte: Deportes) {
+    return this.firestore.collection('deportes').doc(deporte.idDeporte).update({
+      nombreDeporte: deporte.nombreDeporte,
+      imagenDeporteURL: deporte.imagenDeporteURL,
+      lugarDeporte: deporte.lugarDeporte,
+      comentarioDeporte: deporte.comentarioDeporte,
+      valoracionEntrenamiento: deporte.valoracionEntrenamiento,
+      fotoCamaraDeporte: deporte.fotoCamaraDeporte,
+      fechaDeporte : deporte.fechaDeporte
+    });
+  }
+
+  // Obtener un streaming por su ID
+  getDeporteById(idDeporte: string): Observable<Deportes> {
+    return this.firestore.collection('deportes').doc(idDeporte).valueChanges() as Observable<Deportes>;
   }
 
  

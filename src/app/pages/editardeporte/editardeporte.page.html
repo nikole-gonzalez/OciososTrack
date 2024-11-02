@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Editar Actividad Física</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listado-deportes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="deporte.nombreDeporte" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Lugar</ion-label>
+        <ion-input [(ngModel)]="deporte.lugarDeporte" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Comentario</ion-label>
+        <ion-input [(ngModel)]="deporte.comentarioDeporte" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Valoración</ion-label>
+        <ion-input [(ngModel)]="deporte.valoracionEntrenamiento" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-input [(ngModel)]="deporte.fechaDeporte" type="number"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="actualizarDeporte()">Actualizar Streaming</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

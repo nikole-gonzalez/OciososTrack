@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BlueyPageRoutingModule } from './bluey-routing.module';
+import { RegistrodeportePageRoutingModule } from './registrodeporte-routing.module';
 
-import { BlueyPage } from './bluey.page';
+import { RegistrodeportePage } from './registrodeporte.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BlueyPageRoutingModule
+    RegistrodeportePageRoutingModule
   ],
-  declarations: [BlueyPage]
+  declarations: [RegistrodeportePage]
 })
-export class BlueyPageModule {}
+export class RegistrodeportePageModule {}

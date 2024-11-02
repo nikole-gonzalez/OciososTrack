@@ -5,38 +5,41 @@
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Streaming</ion-title>
+    <ion-title>Actividad Física</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!--Cards contenido de Series-->
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
-  <ng-container *ngIf="streamings.length > 0">
-  <ion-card *ngFor="let streaming of streamings">  
+  <ng-container *ngIf="deportes.length > 0">
+  <ion-card *ngFor="let deporte of deportes">  
     <ion-card-header>
-      <ion-card-title style="font-size: large;">{{streaming.tituloStreaming}}</ion-card-title>
+      <ion-card-title style="font-size: large;">{{deporte.nombreDeporte}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item style="justify-content: center;">
-          <img [src]="streaming.imagenStreamingURL" alt="Imagen del streaming" />
+          <img [src]="deporte.imagenDeporteURL" alt="Imagen del Deporte" />
         </ion-item>
         <ion-item>
-          <ion-label>Plataforma: {{ streaming.plataformaStreaming }} </ion-label>
+          <ion-label>Lugar: {{ deporte.lugarDeporte }} </ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Valoración: {{ streaming.valoracionStreaming }}</ion-label>
+          <ion-label>Valoración: {{ deporte.valoracionEntrenamiento }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Comentario: {{ streaming.comentarioStreaming }}</ion-label>
+          <ion-label>Comentario: {{ deporte.comentarioDeporte }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fecha: {{ deporte.fechaDeporte }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img [src]="streaming.fotoStreaming" alt="Imagen del streaming" />
+            <img [src]="deporte.fotoCamaraDeporte" alt="Imagen del Deporte" />
           </ion-thumbnail>
         </ion-item>
-        <ion-button (click)="editarStreaming(streaming.idStreaming)">Editar</ion-button>
-        <ion-button color="danger" (click)="eliminarStreaming(streaming.idStreaming)">Eliminar</ion-button>
+        <ion-button (click)="editarDeporte(deporte.idDeporte)">Editar</ion-button>
+        <ion-button color="danger" (click)="eliminarDeporte(deporte.idDeporte)">Eliminar</ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>
@@ -44,7 +47,7 @@
 
   <!--Fab-->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
-    <ion-fab-button [routerLink]="['/registrostreaming']">
+    <ion-fab-button [routerLink]="['/registrodeporte']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
