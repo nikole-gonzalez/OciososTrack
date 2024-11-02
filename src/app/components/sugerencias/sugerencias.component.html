@@ -11,6 +11,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ion-spinner *ngIf="loading"></ion-spinner>
   <ion-card *ngFor="let pelicula of peliculas">
     <ion-card-header>
       {{pelicula.title}}
