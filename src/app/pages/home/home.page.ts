@@ -18,12 +18,6 @@ export class HomePage {
     }
   }
 
-  // Función para cerrar sesión
-  gcerrarSesion() {
-    this.authlocalService.gCerrarSesion();
-    this.router.navigate(['/login']);
-  }
-
   // Función navegar entre páginas
   ingresarListadoLibros() {
     this.router.navigate(['/listado']);
