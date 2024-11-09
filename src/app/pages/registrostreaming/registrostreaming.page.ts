@@ -14,6 +14,7 @@ defineCustomElements(window);
   styleUrls: ['./registrostreaming.page.scss'],
 })
 export class RegistrostreamingPage implements OnInit {
+  formTouched = false;
 
   imagenStreamingURL ="";
   tituloStreaming ="";
@@ -30,38 +31,52 @@ export class RegistrostreamingPage implements OnInit {
   }
 
   agregarStreaming() {
-    if (this.fotoStreaming) {
-      const imageName = `${new Date().getTime()}_streaming.jpg`;
-  
-      this.firebaseOciososService.subirImagenYObtenerURLStreaming(this.fotoStreaming, imageName)
-        .then(urlImagen => {
-          this.fotoStreaming = urlImagen;
-  
-          const nuevoStreaming = new Streaming(
-            this.imagenStreamingURL,
-            this.tituloStreaming,
-            this.plataformaStreaming,
-            this.comentarioStreaming,
-            this.valoracionStreaming,
-            this.fotoStreaming,
-            this.userId,
-          );
-  
-          this.firebaseOciososService.agregarStreaming(nuevoStreaming).then(() => {
-            console.log('Streaming agregado con éxito');
-            this.presentToast('top', 'Streaming agregado con éxito');
-            this.limpiarFormulario();
-            this.router.navigate(['/listado-series']);
-          }).catch(error => {
-            console.error('Error al agregar el streaming:', error);
-            this.presentToast('top', 'Error al agregar el streaming');
-          });
-        })
-        .catch(error => {
-          console.error('Error al subir la imagen:', error);
-          this.presentToast('top', 'Error al subir la imagen');
-        });
+    this.formTouched = true; // Marca el formulario como tocado
+
+    // Validación de campos obligatorios
+    if (!this.imagenStreamingURL || !this.tituloStreaming || !this.plataformaStreaming || !this.comentarioStreaming || !this.valoracionStreaming || !this.fotoStreaming) {
+      this.presentToast('top', 'Todos los campos son obligatorios');
+      return;
     }
+  
+    // Validación de la valoración
+    if (this.valoracionStreaming < 1 || this.valoracionStreaming > 10) {
+      this.presentToast('top', 'La valoración debe estar entre 1 y 10');
+      return;
+    }
+
+      if (this.fotoStreaming) {
+        const imageName = `${new Date().getTime()}_streaming.jpg`;
+    
+        this.firebaseOciososService.subirImagenYObtenerURLStreaming(this.fotoStreaming, imageName)
+          .then(urlImagen => {
+            this.fotoStreaming = urlImagen;
+    
+            const nuevoStreaming = new Streaming(
+              this.imagenStreamingURL,
+              this.tituloStreaming,
+              this.plataformaStreaming,
+              this.comentarioStreaming,
+              this.valoracionStreaming,
+              this.fotoStreaming,
+              this.userId,
+            );
+    
+            this.firebaseOciososService.agregarStreaming(nuevoStreaming).then(() => {
+              console.log('Streaming agregado con éxito');
+              this.presentToast('top', 'Streaming agregado con éxito');
+              this.limpiarFormulario();
+              this.router.navigate(['/listado-series']);
+            }).catch(error => {
+              console.error('Error al agregar el streaming:', error);
+              this.presentToast('top', 'Error al agregar el streaming');
+            });
+          })
+          .catch(error => {
+            console.error('Error al subir la imagen:', error);
+            this.presentToast('top', 'Error al subir la imagen');
+          });
+      }
   }
 
   async presentToast( position: 'top' | 'middle' | 'bottom', mensaje: string) {
