@@ -1,4 +1,5 @@
 export class Deportes {
+    
     idDeporte?: string;
     imagenDeporteURL?: string;
     nombreDeporte: string;

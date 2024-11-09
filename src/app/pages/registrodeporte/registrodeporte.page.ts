@@ -14,6 +14,8 @@ defineCustomElements(window);
   styleUrls: ['./registrodeporte.page.scss'],
 })
 export class RegistrodeportePage implements OnInit {
+  formTouched = false;
+
   imagenDeporteURL = "";
   nombreDeporte = "";
   lugarDeporte = "";
@@ -29,6 +31,20 @@ export class RegistrodeportePage implements OnInit {
   }
 
   agregarDeporte() {
+    this.formTouched = true; // Marca el formulario como tocado
+  
+    // Validación de campos obligatorios
+    if (!this.nombreDeporte || !this.lugarDeporte || !this.comentarioDeporte || !this.fechaDeporte || !this.imagenDeporteURL || !this.fotoCamaraDeporte) {
+      this.presentToast('top', 'Todos los campos son obligatorios');
+      return;
+    }
+  
+    // Validación de la valoración
+    if (this.valoracionEntrenamiento < 1 || this.valoracionEntrenamiento > 10) {
+      this.presentToast('top', 'La valoración debe estar entre 1 y 10');
+      return;
+    }
+  
     if (this.fotoCamaraDeporte) {
       const imageName = `${new Date().getTime()}_deporte.jpg`;
   
@@ -61,8 +77,11 @@ export class RegistrodeportePage implements OnInit {
           console.error('Error al subir la imagen:', error);
           this.presentToast('top', 'Error al subir la imagen');
         });
+    } else {
+      this.presentToast('top', 'Debe tomar o seleccionar una foto');
     }
   }
+  
 
   async presentToast( position: 'top' | 'middle' | 'bottom', mensaje: string) {
     const toast = await this.toastController.create({
