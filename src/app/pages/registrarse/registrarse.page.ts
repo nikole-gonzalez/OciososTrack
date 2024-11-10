@@ -76,7 +76,7 @@ export class RegistrarsePage implements OnInit {
         const user = await this.authService.registerUser(
           this.regForm.value.correoReg,
           this.regForm.value.contrasenaReg,
-          this.regForm.value.nombreUsuarioReg
+          this.regForm.value.nombreUsuarioReg    
         ).catch((error) => {
           console.log(error);
           loading.dismiss();

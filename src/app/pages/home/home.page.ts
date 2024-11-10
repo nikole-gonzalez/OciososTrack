@@ -31,6 +31,11 @@ export class HomePage {
     this.router.navigate(['/listado-deportes']);
   }
 
+  ingresarListadoArtes() {
+    this.router.navigate(['/listado-artes']);
+  }
+
+
 
   // Función para detectar si estamos en la ruta principal de 'home'
   esHomeRuta(): boolean {

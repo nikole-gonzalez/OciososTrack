@@ -8,6 +8,7 @@ import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage'
 import { Observable, of } from 'rxjs';
 import { Streaming } from '../class/streaming';
 import { Deportes } from '../class/deportes';
+import { Arte } from '../class/arte';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class FirebaseOciososService {
   private coleccionLibros ='libros';
   private coleccionStreaming = 'streaming';
   private coleccionDeportes = 'deportes';
+  private coleccionArtes = 'artes';
   private storage = getStorage (initializeApp(environment.firebaseConfig));
   userId: any;
 
@@ -204,6 +206,64 @@ getLibroById(idLibro: string): Observable<Libros> {
   getDeporteById(idDeporte: string): Observable<Deportes> {
     return this.firestore.collection('deportes').doc(idDeporte).valueChanges() as Observable<Deportes>;
   }
+
+  //-------------ARTES ----------------------//
+
+   //Obtengo todos los Deportes por usuario
+ getArtes(): Observable<Arte[]> {
+  return this.firestore.collection<Arte>(this.coleccionArtes, ref => 
+    ref.where('userId', '==', this.userId)
+  ).valueChanges({ idField: 'idArte' });
+}
+
+  // Elimino Deporte
+  eliminarArte(id: string){
+    return this.firestore.collection(this.coleccionArtes).doc(id).delete();
+
+  }
+
+  
+  // Método para subir una imagen al storage de Deporte
+  async subirImagenYObtenerURLArte(foto: string, nombre: string): Promise<string> {
+    const storageRefArte = ref(this.storage, `artes/${nombre}`);
+    await uploadString(storageRefArte, foto, 'data_url');
+    return await getDownloadURL(storageRefArte);
+  }
+
+  // Agregar Deporte
+  agregarArte(artes : Arte) {
+    if (this.userId) {
+      const arteConUserId = { ...artes, userId: this.userId };
+      return this.firestore.collection('artes').add(arteConUserId).then(docRef => {
+        const idGeneradoArte = docRef.id;
+        return this.firestore.collection('artes').doc(idGeneradoArte).update({ idArte: idGeneradoArte });
+      });
+    } else {
+      return Promise.reject('No se encontró UserId');
+    }
+  }
+
+  // Modifico información del streaming
+  actualizarArte(artes: Arte) {
+    return this.firestore.collection('artes').doc(artes.idArte).update({
+
+      nombreArte: artes.nombreArte,
+      imagenArteURL: artes.imagenArteURL,
+      descripcionArte: artes.descripcionArte,
+      valoracionArte: artes.valoracionArte,
+      materialesArte: artes.materialesArte,
+      fotoCamaraArte: artes.fotoCamaraArte,
+
+    });
+  }
+
+  // Obtener un streaming por su ID
+  getArteById(idArte: string): Observable<Arte> {
+    return this.firestore.collection('artes').doc(idArte).valueChanges() as Observable<Arte>;
+  }
+
+
+
 
  
 
