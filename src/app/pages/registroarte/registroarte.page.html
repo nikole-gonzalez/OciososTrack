@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+    <ion-title>Registra tus manualidades </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listado-deportes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <div class="ion-padding-vertical">
+    <ion-card-title>
+      <ion-label>
+        <h1 style="text-align: center;">Formulario para agregar Manualidades </h1>
+      </ion-label>
+    </ion-card-title>
+  
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-label position="floating">IMAGEN URL: </ion-label>
+        <ion-input [(ngModel)]="imagenArteURL" type="img"></ion-input>
+      </ion-item> 
+                
+      <ion-item>
+        <ion-label position="floating">Nombre: </ion-label>
+        <ion-input [(ngModel)]="nombreArte"  type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción: </ion-label>
+        <ion-input [(ngModel)]="descripcionArte" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Materiales o técnicas: </ion-label>
+        <ion-input [(ngModel)]="materialesArte" type="area"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Valoración: </ion-label>
+        <ion-input [(ngModel)]="valoracionArte"type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="fotoCamaraArte" type="text"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
+      </ion-item>
+      <br>
+
+      <ion-button  (click)="agregarArte()"> Guardar Manualidad </ion-button>
+
+    </ion-card-content>
+

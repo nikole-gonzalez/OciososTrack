@@ -1,0 +1,80 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Manualidades</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Cards contenido de libros-->
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ng-container *ngIf="artes.length > 0">
+  <ion-card *ngFor="let arte of artes">  
+    <ion-card-header>
+      <ion-card-title style="font-size: large;">{{arte.nombreArte}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item style="justify-content: center;">
+          <img [src]="arte.imagenArteURL" alt="Imagen del libro" />
+        </ion-item>
+        <ion-item>
+          <ion-label>Descripción: {{ arte.descripcionArte }} </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Materiales o técnicas: {{ arte.materialesArte }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Valoración: {{ arte.valoracionArte }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [src]="arte.fotoCamaraArte" alt="Imagen del libro" />
+          </ion-thumbnail>
+        </ion-item>
+        <ion-button (click)="editarArtes(arte.idArte)">Editar</ion-button>
+        <ion-button color="danger" (click)="eliminarArte(arte.idArte)">Eliminar</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </ng-container>
+
+  <!--Fab-->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
+    <ion-fab-button [routerLink]="['/registroarte']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+<!--Tab-->
+<ion-footer>
+  <!-- Tab pestañas con ion-segment -->
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="usuario">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="sugerencias">
+      <ion-icon name="sparkles-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="configuracion">
+      <ion-icon name="cog-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>
+
+
+
+
+
+
+
+
+  
+
+
+

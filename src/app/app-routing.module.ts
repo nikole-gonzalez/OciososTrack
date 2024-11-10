@@ -66,9 +66,23 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrodeporte/registrodeporte.module').then( m => m.RegistrodeportePageModule)
   },
   {
+    path: 'listado-artes',
+    loadChildren: () => import('./pages/listado-artes/listado-artes.module').then( m => m.ListadoArtesPageModule)
+  },
+  {
+    path: 'editarartes/:idArte',
+    loadChildren: () => import('./pages/editarartes/editarartes.module').then( m => m.EditarartesPageModule)
+  },
+  {
+    path: 'registroarte',
+    loadChildren: () => import('./pages/registroarte/registroarte.module').then( m => m.RegistroartePageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error/error.module').then( m => m.ErrorPageModule)
   },
+ 
+
 
 
 
