@@ -15,6 +15,7 @@ defineCustomElements(window);
   styleUrls: ['./registrolibros.page.scss'],
 })
 export class RegistrolibrosPage implements OnInit {
+  formTouched = false;
 
   imagenLibroURL ="";
   tituloLibro ="";
@@ -30,38 +31,52 @@ export class RegistrolibrosPage implements OnInit {
   ngOnInit() {}
 
   agregarLibros() {
-    if (this.fotoCamaraLibro) {
-      const imageName = `${new Date().getTime()}_libro.jpg`;
-  
-      this.firebaseOciososService.subirImagenYObtenerURL(this.fotoCamaraLibro, imageName)
-        .then(urlImagen => {
-          this.fotoCamaraLibro = urlImagen;
-  
-          const nuevoLibro = new Libros(
-            this.imagenLibroURL,
-            this.tituloLibro,
-            this.autorLibro,
-            this.comentarioLibro,
-            this.valoracionLibro,
-            this.fotoCamaraLibro,
-            this.userId,
-          );
-  
-          this.firebaseOciososService.agregarLibros(nuevoLibro).then(() => {
-            console.log('Libro agregado con éxito');
-            this.presentToast('top', 'Libro agregado con éxito');
-            this.limpiarFormulario();
-            this.router.navigate(['/listado']);
-          }).catch(error => {
-            console.error('Error al agregar el libro:', error);
-            this.presentToast('top', 'Error al agregar el libro');
-          });
-        })
-        .catch(error => {
-          console.error('Error al subir la imagen:', error);
-          this.presentToast('top', 'Error al subir la imagen');
-        });
+    this.formTouched = true; // Marca el formulario como tocado
+
+    // Validación de campos obligatorios
+    if (!this.imagenLibroURL || !this.tituloLibro || !this.autorLibro || !this.comentarioLibro || !this.valoracionLibro || !this.fotoCamaraLibro) {
+      this.presentToast('top', 'Todos los campos son obligatorios');
+      return;
     }
+  
+    // Validación de la valoración
+    if (this.valoracionLibro < 1 || this.valoracionLibro > 10) {
+      this.presentToast('top', 'La valoración debe estar entre 1 y 10');
+      return;
+    }
+
+      if (this.fotoCamaraLibro) {
+        const imageName = `${new Date().getTime()}_libro.jpg`;
+    
+        this.firebaseOciososService.subirImagenYObtenerURL(this.fotoCamaraLibro, imageName)
+          .then(urlImagen => {
+            this.fotoCamaraLibro = urlImagen;
+    
+            const nuevoLibro = new Libros(
+              this.imagenLibroURL,
+              this.tituloLibro,
+              this.autorLibro,
+              this.comentarioLibro,
+              this.valoracionLibro,
+              this.fotoCamaraLibro,
+              this.userId,
+            );
+    
+            this.firebaseOciososService.agregarLibros(nuevoLibro).then(() => {
+              console.log('Libro agregado con éxito');
+              this.presentToast('top', 'Libro agregado con éxito');
+              this.limpiarFormulario();
+              this.router.navigate(['/listado']);
+            }).catch(error => {
+              console.error('Error al agregar el libro:', error);
+              this.presentToast('top', 'Error al agregar el libro');
+            });
+          })
+          .catch(error => {
+            console.error('Error al subir la imagen:', error);
+            this.presentToast('top', 'Error al subir la imagen');
+          });
+      }
   }
 
   async presentToast( position: 'top' | 'middle' | 'bottom', mensaje: string) {
