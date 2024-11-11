@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.service';
 import { Libros } from 'src/app/class/libros';
+import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 
 
 @Component({
@@ -102,5 +103,42 @@ actualizarLibro() {
     });
     toast.present();
   }
+
+  async seleccionarImagen(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: source,
+        quality: 100,
+      });
+      if (image.dataUrl) {
+        this.libro.fotoCamaraLibro = image.dataUrl;
+      } else {
+        console.error("Error al obtener la imagen");
+      }
+    } catch (error) {
+      console.error("Error al acceder a la imagen", error);
+    }
+  }
+
+  tomarFoto() {
+    this.seleccionarImagen(CameraSource.Camera);
+  }
+
+  abrirGaleria() {
+    this.seleccionarImagen(CameraSource.Photos);
+  }
+
+  clearInput(field: string) {
+    switch (field) {
+      case 'imagenLibroURL':
+        this.libro.imagenLibroURL = '';
+        break;
+        case 'fotoCamaraLibro':
+          this.libro.fotoCamaraLibro = '';
+        break;
+    }}
+
+    
 
 }

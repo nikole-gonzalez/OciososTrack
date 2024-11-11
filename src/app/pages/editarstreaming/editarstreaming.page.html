@@ -12,6 +12,12 @@
     <ion-card-content>
 
       <ion-item>
+        <ion-label position="floating">Imagen URL: </ion-label>
+        <ion-input [(ngModel)]="streaming.imagenStreamingURL" type="text" (ionFocus)="clearInput('imagenStreamingURL')"></ion-input>
+      </ion-item>
+      
+      
+      <ion-item>
         <ion-label position="floating">Título</ion-label>
         <ion-input [(ngModel)]="streaming.tituloStreaming" type="text"></ion-input>
       </ion-item>
@@ -30,6 +36,17 @@
         <ion-label position="floating">Valoración</ion-label>
         <ion-input [(ngModel)]="streaming.valoracionStreaming" type="number"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="streaming.fotoStreaming" type="text" (ionFocus)="clearInput('fotoStreaming')"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
+      </ion-item>
+      <br>
+
+
       <ion-button expand="block" (click)="actualizarStreaming()">Actualizar Streaming</ion-button>
 
     </ion-card-content>

@@ -82,5 +82,18 @@ export class EditarartesPage implements OnInit {
   }
 
 
+  
+  clearInput(field: string) {
+    switch (field) {
+      case 'imagenArteURL':
+        this.arte.imagenArteURL = '';
+        break;
+        case 'fotoCamaraArte':
+          this.arte.fotoCamaraArte = '';
+        break;
+    }}
+
+
+
 }
 
