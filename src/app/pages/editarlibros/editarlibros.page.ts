@@ -68,6 +68,19 @@ actualizarLibro() {
 
   //NO FUINCIONA 1
   actualizarLibro() {
+
+    if (!this.libro.tituloLibro || !this.libro.autorLibro || !this.libro.comentarioLibro || 
+      this.libro.valoracionLibro === null || this.libro.valoracionLibro === undefined) {
+    this.presentToast('Todos los campos son obligatorios');
+    return;
+  }
+
+  // Validación de la valoración
+  if (this.libro.valoracionLibro < 1 || this.libro.valoracionLibro > 10) {
+    this.presentToast('La valoración debe estar entre 1 y 10');
+    return;
+  }
+
     this.firebaseOciososService.actualizarLibro(this.libro).then(() => {
       console.log('Libro actualizado con éxito');
       this.router.navigate(['/listado']);  // Redirigir al listado después de la actualización

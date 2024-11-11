@@ -21,26 +21,33 @@
         <ion-label position="floating">IMAGEN URL: </ion-label>
         <ion-input [(ngModel)]="imagenArteURL" type="img"></ion-input>
       </ion-item> 
+      <ion-text color="danger" *ngIf="!imagenArteURL && formTouched">La imagen obligatoria.</ion-text>
                 
       <ion-item>
         <ion-label position="floating">Nombre: </ion-label>
         <ion-input [(ngModel)]="nombreArte"  type="text"></ion-input>
       </ion-item>
+      <ion-text color="danger" *ngIf="!nombreArte && formTouched">El nombre es obligatorio.</ion-text>
 
       <ion-item>
         <ion-label position="floating">Descripción: </ion-label>
         <ion-input [(ngModel)]="descripcionArte" type="text"></ion-input>
       </ion-item>
+      <ion-text color="danger" *ngIf="!descripcionArte && formTouched">La descripción es obligatoria.</ion-text>
 
       <ion-item>
         <ion-label position="floating">Materiales o técnicas: </ion-label>
         <ion-input [(ngModel)]="materialesArte" type="area"></ion-input>
       </ion-item>
+      <ion-text color="danger" *ngIf="!materialesArte && formTouched">Los materiales son obligatorios.</ion-text>
 
       <ion-item>
         <ion-label position="floating">Valoración: </ion-label>
         <ion-input [(ngModel)]="valoracionArte"type="text"></ion-input>
       </ion-item>
+      <ion-text color="danger" *ngIf="(valoracionArte < 1 || valoracionArte > 10) && formTouched">
+        La valoración debe estar entre 1 y 10.
+      </ion-text>
 
       <ion-item>
         <ion-label position="floating">Foto:</ion-label>
@@ -49,6 +56,7 @@
         <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
         <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
       </ion-item>
+      <ion-text color="danger" *ngIf="!fotoCamaraArte && formTouched">La foto es obligatoria.</ion-text>
       <br>
 
       <ion-button  (click)="agregarArte()"> Guardar Manualidad </ion-button>

@@ -14,6 +14,8 @@ defineCustomElements(window);
   styleUrls: ['./registroarte.page.scss'],
 })
 export class RegistroartePage implements OnInit {
+  formTouched = false;
+
   imagenArteURL = "";
   nombreArte = "";
   descripcionArte = "";
@@ -29,38 +31,51 @@ export class RegistroartePage implements OnInit {
   }
 
   agregarArte() {
-    if (this.fotoCamaraArte) {
-      const imageName = `${new Date().getTime()}_arte.jpg`;
-  
-      this.firebaseOciososService.subirImagenYObtenerURLArte(this.fotoCamaraArte, imageName)
-        .then(urlImagen => {
-          this.fotoCamaraArte = urlImagen;
-  
-          const nuevoArte = new Arte(
-            this.imagenArteURL,
-            this.nombreArte,
-            this.descripcionArte,
-            this.valoracionArte,
-            this.materialesArte,
-            this.fotoCamaraArte,
-            this.userId,
-          );
-  
-          this.firebaseOciososService.agregarArte(nuevoArte).then(() => {
-            console.log('Manualidad agregada con éxito');
-            this.presentToast('top', 'Manualidad agregada con éxito');
-            this.limpiarFormulario();
-            this.router.navigate(['/listado-artes']);
-          }).catch(error => {
-            console.error('Error al agregar Manualidad:', error);
-            this.presentToast('top', 'Error al agregar Manulidad');
-          });
-        })
-        .catch(error => {
-          console.error('Error al subir la imagen:', error);
-          this.presentToast('top', 'Error al subir la imagen');
-        });
+    this.formTouched = true; // Marca el formulario como tocado
+      // Validación de campos obligatorios
+    if (!this.imagenArteURL || !this.nombreArte || !this.descripcionArte || !this.valoracionArte || !this.materialesArte || !this.fotoCamaraArte) {
+      this.presentToast('top', 'Todos los campos son obligatorios');
+      return;
     }
+  
+    // Validación de la valoración
+    if (this.valoracionArte < 1 || this.valoracionArte > 10) {
+      this.presentToast('top', 'La valoración debe estar entre 1 y 10');
+      return;
+    }
+
+      if (this.fotoCamaraArte) {
+        const imageName = `${new Date().getTime()}_arte.jpg`;
+    
+        this.firebaseOciososService.subirImagenYObtenerURLArte(this.fotoCamaraArte, imageName)
+          .then(urlImagen => {
+            this.fotoCamaraArte = urlImagen;
+    
+            const nuevoArte = new Arte(
+              this.imagenArteURL,
+              this.nombreArte,
+              this.descripcionArte,
+              this.valoracionArte,
+              this.materialesArte,
+              this.fotoCamaraArte,
+              this.userId,
+            );
+    
+            this.firebaseOciososService.agregarArte(nuevoArte).then(() => {
+              console.log('Manualidad agregada con éxito');
+              this.presentToast('top', 'Manualidad agregada con éxito');
+              this.limpiarFormulario();
+              this.router.navigate(['/listado-artes']);
+            }).catch(error => {
+              console.error('Error al agregar Manualidad:', error);
+              this.presentToast('top', 'Error al agregar Manulidad');
+            });
+          })
+          .catch(error => {
+            console.error('Error al subir la imagen:', error);
+            this.presentToast('top', 'Error al subir la imagen');
+          });
+      }
   }
 
   async presentToast( position: 'top' | 'middle' | 'bottom', mensaje: string) {
