@@ -37,6 +37,19 @@ export class EditardeportePage implements OnInit {
     }
     
   actualizarDeporte() {
+
+    if (!this.deporte.imagenDeporteURL || !this.deporte.nombreDeporte || !this.deporte.lugarDeporte || !this.deporte.comentarioDeporte || !this.deporte.fotoCamaraDeporte || !this.deporte.fechaDeporte ||
+      this.deporte.valoracionEntrenamiento === null || this.deporte.valoracionEntrenamiento === undefined) {
+    this.presentToast('Todos los campos son obligatorios');
+    return;
+  }
+
+  // Validación de la valoración
+  if (this.deporte.valoracionEntrenamiento < 1 || this.deporte.valoracionEntrenamiento > 10) {
+    this.presentToast('La valoración debe estar entre 1 y 10');
+    return;
+  }
+
     this.firebaseOciososService.actualizarDeporte(this.deporte).then(() => {
       console.log('Deporte actualizado con éxito');
       this.router.navigate(['/listado-deportes']);  // Redirigir al listado después de la actualización
