@@ -13,7 +13,7 @@
 
       <ion-item>
         <ion-label position="floating">Imagen URL: </ion-label>
-        <ion-input [(ngModel)]="arte.imagenArteURL" type="text"></ion-input>
+        <ion-input [(ngModel)]="arte.imagenArteURL" type="text" (ionFocus)="clearInput('imagenArteURL')"></ion-input>
       </ion-item>
       
       <ion-item>
@@ -38,7 +38,7 @@
 
       <ion-item>
         <ion-label position="floating">Foto:</ion-label>
-        <ion-input [(ngModel)]="arte.fotoCamaraArte" type="text"></ion-input>
+        <ion-input [(ngModel)]="arte.fotoCamaraArte" type="text" (ionFocus)="clearInput('fotoCamaraArte')"></ion-input>
         <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
         <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
         <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>

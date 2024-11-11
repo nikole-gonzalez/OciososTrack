@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Deportes } from 'src/app/class/deportes';
 import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.service';
+import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-editardeporte',
@@ -67,6 +68,44 @@ export class EditardeportePage implements OnInit {
     });
     toast.present();
   }
+
+
+  async seleccionarImagen(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: source,
+        quality: 100,
+      });
+      if (image.dataUrl) {
+        this.deporte.fotoCamaraDeporte = image.dataUrl;
+      } else {
+        console.error("Error al obtener la imagen");
+      }
+    } catch (error) {
+      console.error("Error al acceder a la imagen", error);
+    }
+  }
+
+  tomarFoto() {
+    this.seleccionarImagen(CameraSource.Camera);
+  }
+
+  abrirGaleria() {
+    this.seleccionarImagen(CameraSource.Photos);
+  }
+
+
+  clearInput(field: string) {
+    switch (field) {
+      case 'imagenDeporteURL':
+        this.deporte.imagenDeporteURL = '';
+        break;
+        case 'fotoCamaraDeporte':
+          this.deporte.fotoCamaraDeporte = '';
+        break;
+    }}
+
 
 }
 

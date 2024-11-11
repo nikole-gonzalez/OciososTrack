@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Streaming } from 'src/app/class/streaming';
 import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.service';
+import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-editarstreaming',
@@ -75,5 +76,42 @@ export class EditarstreamingPage implements OnInit {
     });
     toast.present();
   }
+
+  clearInput(field: string) {
+    switch (field) {
+      case 'imagenStreamingURL':
+        this.streaming.imagenStreamingURL = '';
+        break;
+        case 'fotoStreaming':
+          this.streaming.fotoStreaming = '';
+        break;
+    }}
+  
+
+  async seleccionarImagen(source: CameraSource) {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: source,
+        quality: 100,
+      });
+      if (image.dataUrl) {
+        this.streaming.fotoStreaming = image.dataUrl;
+      } else {
+        console.error("Error al obtener la imagen");
+      }
+    } catch (error) {
+      console.error("Error al acceder a la imagen", error);
+    }
+  }
+
+  tomarFoto() {
+    this.seleccionarImagen(CameraSource.Camera);
+  }
+
+  abrirGaleria() {
+    this.seleccionarImagen(CameraSource.Photos);
+  }
+
 
 }
