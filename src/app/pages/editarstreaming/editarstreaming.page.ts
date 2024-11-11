@@ -46,6 +46,19 @@ export class EditarstreamingPage implements OnInit {
     
 
   actualizarStreaming() {
+
+    if (!this.streaming.imagenStreamingURL || !this.streaming.tituloStreaming || !this.streaming.plataformaStreaming || !this.streaming.comentarioStreaming || !this.streaming.fotoStreaming ||
+      this.streaming.valoracionStreaming === null || this.streaming.valoracionStreaming === undefined) {
+    this.presentToast('Todos los campos son obligatorios');
+    return;
+  }
+
+  // Validación de la valoración
+  if (this.streaming.valoracionStreaming < 1 || this.streaming.valoracionStreaming > 10) {
+    this.presentToast('La valoración debe estar entre 1 y 10');
+    return;
+  }
+
     this.firebaseOciososService.actualizarStreaming(this.streaming).then(() => {
       console.log('Streaming actualizado con éxito');
       this.router.navigate(['/listado-series']);  // Redirigir al listado después de la actualización

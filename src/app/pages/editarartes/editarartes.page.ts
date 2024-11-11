@@ -38,6 +38,19 @@ export class EditarartesPage implements OnInit {
     }
     
   actualizarArte() {
+
+    if (!this.arte.nombreArte || !this.arte.descripcionArte || !this.arte.imagenArteURL || !this.arte.fotoCamaraArte || !this.arte.materialesArte ||
+      this.arte.valoracionArte === null || this.arte.valoracionArte === undefined) {
+    this.presentToast('Todos los campos son obligatorios');
+    return;
+  }
+
+  // Validación de la valoración
+  if (this.arte.valoracionArte < 1 || this.arte.valoracionArte > 10) {
+    this.presentToast('La valoración debe estar entre 1 y 10');
+    return;
+  }
+
     this.firebaseOciososService.actualizarArte(this.arte).then(() => {
       console.log('Arte actualizado con éxito');
       this.router.navigate(['/listado-artes']);  // Redirigir al listado después de la actualización
