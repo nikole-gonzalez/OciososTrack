@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { Streaming } from '../class/streaming';
 import { Deportes } from '../class/deportes';
 import { Arte } from '../class/arte';
+import { Juego } from '../class/juego';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class FirebaseOciososService {
   private coleccionStreaming = 'streaming';
   private coleccionDeportes = 'deportes';
   private coleccionArtes = 'artes';
+  private coleccionJuegos = 'juegos';
   private storage = getStorage (initializeApp(environment.firebaseConfig));
   userId: any;
 
@@ -155,28 +157,28 @@ getLibroById(idLibro: string): Observable<Libros> {
   //--------DEPORTES--------//
 
 
- //Obtengo todos los Deportes por usuario
+ //Obtengo todos los deportes por usuario
  getDeportes(): Observable<Deportes[]> {
   return this.firestore.collection<Deportes>(this.coleccionDeportes, ref => 
     ref.where('userId', '==', this.userId)
   ).valueChanges({ idField: 'idDeporte' });
 }
 
-  // Elimino Deporte
+  // Elimino deporte
   eliminarDeporte(id: string){
     return this.firestore.collection(this.coleccionDeportes).doc(id).delete();
 
   }
 
   
-  // Método para subir una imagen al storage de Deporte
+  // Método para subir una imagen al storage de deporte
   async subirImagenYObtenerURLDeportes(foto: string, nombre: string): Promise<string> {
     const storageRefDeporte = ref(this.storage, `deporte/${nombre}`);
     await uploadString(storageRefDeporte, foto, 'data_url');
     return await getDownloadURL(storageRefDeporte);
   }
 
-  // Agregar Deporte
+  // Agregar deporte
   agregarDeporte(deporte : Deportes) {
     if (this.userId) {
       const deporteConUserId = { ...deporte, userId: this.userId };
@@ -189,7 +191,7 @@ getLibroById(idLibro: string): Observable<Libros> {
     }
   }
 
-  // Modifico información del streaming
+  // Modifico información del deporte
   actualizarDeporte(deporte: Deportes) {
     return this.firestore.collection('deportes').doc(deporte.idDeporte).update({
       nombreDeporte: deporte.nombreDeporte,
@@ -202,35 +204,35 @@ getLibroById(idLibro: string): Observable<Libros> {
     });
   }
 
-  // Obtener un streaming por su ID
+  // Obtener un deporte por su ID
   getDeporteById(idDeporte: string): Observable<Deportes> {
     return this.firestore.collection('deportes').doc(idDeporte).valueChanges() as Observable<Deportes>;
   }
 
   //-------------ARTES ----------------------//
 
-   //Obtengo todos los Deportes por usuario
+   //Obtengo todos los artes por usuario
  getArtes(): Observable<Arte[]> {
   return this.firestore.collection<Arte>(this.coleccionArtes, ref => 
     ref.where('userId', '==', this.userId)
   ).valueChanges({ idField: 'idArte' });
 }
 
-  // Elimino Deporte
+  // Elimino arte
   eliminarArte(id: string){
     return this.firestore.collection(this.coleccionArtes).doc(id).delete();
 
   }
 
   
-  // Método para subir una imagen al storage de Deporte
+  // Método para subir una imagen al storage de arte
   async subirImagenYObtenerURLArte(foto: string, nombre: string): Promise<string> {
     const storageRefArte = ref(this.storage, `artes/${nombre}`);
     await uploadString(storageRefArte, foto, 'data_url');
     return await getDownloadURL(storageRefArte);
   }
 
-  // Agregar Deporte
+  // Agregar arte
   agregarArte(artes : Arte) {
     if (this.userId) {
       const arteConUserId = { ...artes, userId: this.userId };
@@ -243,7 +245,7 @@ getLibroById(idLibro: string): Observable<Libros> {
     }
   }
 
-  // Modifico información del streaming
+  // Modifico información arte
   actualizarArte(artes: Arte) {
     return this.firestore.collection('artes').doc(artes.idArte).update({
 
@@ -257,12 +259,65 @@ getLibroById(idLibro: string): Observable<Libros> {
     });
   }
 
-  // Obtener un streaming por su ID
+  // Obtener un arte por su ID
   getArteById(idArte: string): Observable<Arte> {
     return this.firestore.collection('artes').doc(idArte).valueChanges() as Observable<Arte>;
   }
 
+//------------------Juegos----------------------//
 
+   //Obtengo todos los juegos por usuario
+   getJuegos(): Observable<Juego[]> {
+    return this.firestore.collection<Juego>(this.coleccionJuegos, ref => 
+      ref.where('userId', '==', this.userId)
+    ).valueChanges({ idField: 'idJuego' });
+  }
+  
+    // Elimino juegos
+    eliminarJuego(id: string){
+      return this.firestore.collection(this.coleccionJuegos).doc(id).delete();
+  
+    }
+  
+    
+    // Método para subir una imagen al storage de juegos
+    async subirImagenYObtenerURLJuego(foto: string, nombre: string): Promise<string> {
+      const storageRefJuego = ref(this.storage, `juegos/${nombre}`);
+      await uploadString(storageRefJuego, foto, 'data_url');
+      return await getDownloadURL(storageRefJuego);
+    }
+  
+    // Agregar juegos
+    agregarJuego(juegos : Juego) {
+      if (this.userId) {
+        const juegoConUserId = { ...juegos, userId: this.userId };
+        return this.firestore.collection('juegos').add(juegoConUserId).then(docRef => {
+          const idGeneradoJuego = docRef.id;
+          return this.firestore.collection('juegos').doc(idGeneradoJuego).update({ idArte: idGeneradoJuego });
+        });
+      } else {
+        return Promise.reject('No se encontró UserId');
+      }
+    }
+  
+    // Modifico información del juego
+    actualizarJuego(juegos: Juego) {
+      return this.firestore.collection('juegos').doc(juegos.idJuego).update({
+  
+        nombreJuego: juegos.nombreJuego,
+        imagenJuegoURL: juegos.imagenJuegoURL,
+        descripcionJuego: juegos.descripcionJuego,
+        valoracionJuego: juegos.valoracionJuego,
+        formatoJuego: juegos.formatoJuego,
+        fotoCamaraJuego: juegos.fotoCamaraJuego,
+  
+      });
+    }
+  
+    // Obtener un streaming por su ID
+    getJuegoById(idJuego: string): Observable<Juego> {
+      return this.firestore.collection('juegos').doc(idJuego).valueChanges() as Observable<Juego>;
+    }
 
 
  

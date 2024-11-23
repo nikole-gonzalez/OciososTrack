@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<!--Cards contenido de libros-->
+<!--Cards contenido de arte-->
 <ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
   <ng-container *ngIf="artes.length > 0">
   <ion-card *ngFor="let arte of artes">  
@@ -32,7 +32,7 @@
         </ion-item>
         <ion-item>
           <ion-thumbnail slot="start">
-            <img [src]="arte.fotoCamaraArte" alt="Imagen del libro" />
+            <img [src]="arte.fotoCamaraArte" alt="Imagen del arte" />
           </ion-thumbnail>
         </ion-item>
         <ion-button (click)="editarArtes(arte.idArte)">Editar</ion-button>
