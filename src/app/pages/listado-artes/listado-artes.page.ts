@@ -39,7 +39,7 @@ export class ListadoArtesPage implements OnInit {
 
   editarArtes(idArte: string) {
     if (idArte) {
-      this.router.navigate(['/editarartes', idArte]);  // Navegar a la página de edición con el ID del libro
+      this.router.navigate(['/editarartes', idArte]);  // Navegar a la página de edición con el ID del arte
     } else {
       console.error('Error: No se encontró el ID de Arte.');
     }

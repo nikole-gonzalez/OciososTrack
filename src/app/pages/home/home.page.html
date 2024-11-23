@@ -1,10 +1,7 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar *ngIf="esHomeRuta()" style="--background: rgb(246, 244, 235);">
-    <ion-title>Tus intereses</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content class="has-header" [fullscreen]="true" style="--padding-top: 0; --background: rgb(246, 244, 235);">
   <ng-container *ngIf="esHomeRuta(); else segmentOutlet">
+    <h1 style="text-align: center;">Tus intereses</h1>
     <!-- Contenido principal de home -->
     <ion-grid>
       <ion-row>
@@ -34,6 +31,13 @@
             <img alt="img artes home" src="assets/Imagenes/artes.avif" />
             <ion-card-header>
               <ion-card-title>Manualidades</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          <br>
+          <ion-card (click)="ingresarListadoJuegos()" style="--padding-top: 0;" class="shadow-pop-tr">
+            <img alt="img juegos home" src="assets/Imagenes/juegos_categoria.webp" />
+            <ion-card-header>
+              <ion-card-title>Juegos</ion-card-title>
             </ion-card-header>
           </ion-card>
         </ion-col>

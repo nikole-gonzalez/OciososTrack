@@ -29,7 +29,7 @@ export class EditarartesPage implements OnInit {
             this.arte = arteData as Arte;
             this.arte.idArte = idArte; // Asegúrate de asignar el ID al objeto
           } else {
-            console.error("No se encontró el Deporte con el ID:", idArte);
+            console.error("No se encontró el Arte con el ID:", idArte);
           }
         });
       } else {

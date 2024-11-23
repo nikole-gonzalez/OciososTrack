@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(246, 244, 235);">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Juegos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Cards contenido de juego-->
+<ion-content [fullscreen]="true" style ="--background: rgb(246, 244, 235);">
+  <ng-container *ngIf="juegos.length > 0">
+  <ion-card *ngFor="let juego of juegos">  
+    <ion-card-header>
+      <ion-card-title style="font-size: large;">{{juego.nombreJuego}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item style="justify-content: center;">
+          <img [src]="juego.imagenJuegoURL" alt="Imagen del juego" />
+        </ion-item>
+        <ion-item>
+          <ion-label>Descripción: {{ juego.descripcionJuego }} </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Formato del juego: {{ juego.formatoJuego }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Valoración: {{ juego.valoracionJuego }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img [src]="juego.fotoCamaraJuego" alt="Imagen del juego" />
+          </ion-thumbnail>
+        </ion-item>
+        <ion-button (click)="editarJuegos(juego.idJuego)">Editar</ion-button>
+        <ion-button color="danger" (click)="eliminarJuego(juego.idJuego)">Eliminar</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  </ng-container>
+
+  <!--Fab-->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" bottom="100px">
+    <ion-fab-button [routerLink]="['/registrojuego']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
