@@ -23,10 +23,7 @@
       <ion-item>
         <p>Nombre: {{ usuario?.nombre }}</p>
       </ion-item>
-      <ion-button class="btn-block"(click)="gcerrarSesion()">Cerrar sesión</ion-button>
-      <ion-button  class="btn-block" expand="block" (click)="goToHome()" style="margin-top: 20px;">
-        VOLVER ATRÁS
-      </ion-button>
+      <ion-button class="btn-block" expand="block"(click)="gcerrarSesion()">Cerrar sesión</ion-button>
     </ion-card-content>
   </ion-card>
   <ion-spinner *ngIf="loading"></ion-spinner>

@@ -33,8 +33,10 @@
             <img [src]="streaming.fotoStreaming" alt="Imagen del streaming" />
           </ion-thumbnail>
         </ion-item>
+        <div class="center-buttons">
         <ion-button (click)="editarStreaming(streaming.idStreaming)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarStreaming(streaming.idStreaming)">Eliminar</ion-button>
+        </div>
       </ion-list>
     </ion-card-content>
   </ion-card>

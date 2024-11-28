@@ -35,8 +35,10 @@
             <img [src]="libro.fotoCamaraLibro" alt="Imagen del libro" />
           </ion-thumbnail>
         </ion-item>
+        <div class="center-buttons">
         <ion-button (click)="editarLibro(libro.idLibro)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarLibro(libro.idLibro)">Eliminar</ion-button>
+        </div>
       </ion-list>
     </ion-card-content>
   </ion-card>
