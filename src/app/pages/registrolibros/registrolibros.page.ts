@@ -8,7 +8,6 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 defineCustomElements(window);
 
-
 @Component({
   selector: 'app-registrolibros',
   templateUrl: './registrolibros.page.html',
@@ -24,7 +23,6 @@ export class RegistrolibrosPage implements OnInit {
   valoracionLibro =0;
   fotoCamaraLibro= "";
   userId ="";
-
 
   constructor( private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router: Router) { }
 
@@ -97,21 +95,6 @@ export class RegistrolibrosPage implements OnInit {
     this.fotoCamaraLibro = "";
   }
 
-  /*
-  async tomarFoto() {
-    const image = await Camera.getPhoto({
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera,
-      quality: 100,
-    });
-  
-    if (image.dataUrl) {
-      this.fotoCamaraLibro = image.dataUrl;  // Asigna solo si tiene valor
-    } else {
-      console.error("Error al capturar la imagen");
-    }
-  }*/
-
   async seleccionarImagen(source: CameraSource) {
     try {
       const image = await Camera.getPhoto({
@@ -136,6 +119,5 @@ export class RegistrolibrosPage implements OnInit {
   abrirGaleria() {
     this.seleccionarImagen(CameraSource.Photos);
   }
-
 
 }

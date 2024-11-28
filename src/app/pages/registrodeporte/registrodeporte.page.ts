@@ -82,7 +82,6 @@ export class RegistrodeportePage implements OnInit {
     }
   }
   
-
   async presentToast( position: 'top' | 'middle' | 'bottom', mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -127,8 +126,5 @@ export class RegistrodeportePage implements OnInit {
   abrirGaleria() {
     this.seleccionarImagen(CameraSource.Photos);
   }
-
-
-
 
 }

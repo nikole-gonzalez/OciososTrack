@@ -37,14 +37,6 @@ export class ListadoPage implements OnInit {
   });
 }
 
-  //editarLibro(libro: Libros) {
-    //if (libro.idLibro) {
-      //this.router.navigate(['/editarlibros', libro.idLibro]);
-    //} else {
-      //console.error('Error: No se encontró el ID del libro.');
-    //}
-  //}
-
   editarLibro(idLibro: string) {
     if (idLibro) {
       this.router.navigate(['/editarlibros', idLibro]);  // Navegar a la página de edición con el ID del libro
@@ -53,10 +45,6 @@ export class ListadoPage implements OnInit {
     }
   }
 
- /*    // Navegar a la página de edición/modificación de un libro
-  editarLibro(libro: Libros) {
-    this.router.navigate(['/editar-libro', libro.idLibro]);
-  } */
 
   eliminarLibro(idLibro: string) {
     this.firebaseOciososService.eliminarLibro(idLibro).then(() => {
@@ -65,7 +53,6 @@ export class ListadoPage implements OnInit {
       console.error('Error al eliminar el libro: ', error);
     });
   }
-
 
   segmentChanged($event:any){
     console.log($event);

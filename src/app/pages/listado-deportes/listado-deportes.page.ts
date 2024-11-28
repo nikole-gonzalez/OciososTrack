@@ -35,7 +35,6 @@ export class ListadoDeportesPage implements OnInit {
     });
   }
   
-
   editarDeporte(idDeporte: string) {
     if (idDeporte) {
       this.router.navigate(['/editardeporte', idDeporte]);  // Navegar a la página de edición con el ID del streaming

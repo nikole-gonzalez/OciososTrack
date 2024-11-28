@@ -41,11 +41,9 @@
         <ion-label position="floating">Foto:</ion-label>
         <ion-input [(ngModel)]="streaming.fotoStreaming" type="text" (ionFocus)="clearInput('fotoStreaming')"></ion-input>
         <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
         <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
       </ion-item>
       <br>
-
 
       <ion-button expand="block" (click)="actualizarStreaming()">Actualizar Streaming</ion-button>
 

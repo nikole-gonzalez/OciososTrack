@@ -73,7 +73,6 @@ export class RecuperaContrasenaPage implements OnInit {
 
 
   // Función que valida el correo
-
   validaCorreo(correo: string): boolean {
     const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Expresión regular para validar correo
     return patron.test(correo);
@@ -82,6 +81,7 @@ export class RecuperaContrasenaPage implements OnInit {
   // Función para enviar el email
 
   async enviarRecuperacion() {
+
     if (this.validaRecupera(this.recuperaContrasena)) {
       if (this.validaCorreo(this.recuperaContrasena.recuperaCorreo)) {
         try {

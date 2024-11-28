@@ -14,7 +14,6 @@ export class ErrorPage {
 
   constructor() { }
 
-
   // Función de la animación de LotieFiles
   onAnimationCreated(animation: any) {
     console.log(animation);

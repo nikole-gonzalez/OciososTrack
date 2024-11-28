@@ -18,7 +18,6 @@ export class EditardeportePage implements OnInit {
   constructor(private route: ActivatedRoute, private firebaseOciososService : FirebaseOciososService,
     private toastController : ToastController, private router : Router) { }
     
-
     ngOnInit() {
       const idDeporte = this.route.snapshot.paramMap.get('idDeporte');
       console.log("ID del Deporte:", idDeporte); // Verifica que se muestra el ID correcto
@@ -27,7 +26,7 @@ export class EditardeportePage implements OnInit {
         this.firebaseOciososService.getDeporteById(idDeporte).subscribe(deporteData => {
           if (deporteData) {
             this.deporte = deporteData as Deportes;
-            this.deporte.idDeporte = idDeporte; // Asegúrate de asignar el ID al objeto
+            this.deporte.idDeporte = idDeporte;
           } else {
             console.error("No se encontró el Deporte con el ID:", idDeporte);
           }
@@ -59,7 +58,6 @@ export class EditardeportePage implements OnInit {
     });
   }
 
-  
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -68,7 +66,6 @@ export class EditardeportePage implements OnInit {
     });
     toast.present();
   }
-
 
   async seleccionarImagen(source: CameraSource) {
     try {
@@ -95,7 +92,6 @@ export class EditardeportePage implements OnInit {
     this.seleccionarImagen(CameraSource.Photos);
   }
 
-
   clearInput(field: string) {
     switch (field) {
       case 'imagenDeporteURL':
@@ -105,7 +101,6 @@ export class EditardeportePage implements OnInit {
           this.deporte.fotoCamaraDeporte = '';
         break;
     }}
-
 
 }
 

@@ -5,7 +5,7 @@ import { FirebaseLoginService } from './firebase-login.service';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { Streaming } from '../class/streaming';
 import { Deportes } from '../class/deportes';
 import { Arte } from '../class/arte';
@@ -40,7 +40,6 @@ export class FirebaseOciososService {
     ).valueChanges({ idField: 'idLibro' });
   }
 
-
   // Método para subir una imagen al storage
   async subirImagenYObtenerURL(foto: string, nombre: string): Promise<string> {
     const storageRef = ref(this.storage, `libros/${nombre}`);
@@ -60,21 +59,6 @@ export class FirebaseOciososService {
       return Promise.reject('No se encontró UserId');
     }
   }
-
-
-  // Modifico información del libro
-  
-  //actualizarLibro(idLibro: string, libro: Libros) {
-    //return this.firestore.collection('libros').doc(idLibro).update({
-      //tituloLibro: libro.tituloLibro,
-      //imagenLibroURL : libro.imagenLibroURL,
-      //autorLibro: libro.autorLibro,
-      //comentarioLibro: libro.comentarioLibro,
-      //valoracionLibro: libro.valoracionLibro,
-      //fotoCamaraLibro: libro.fotoCamaraLibro
-    //});
-  //}
-
   
   // Modifico información del libro
   actualizarLibro(libro: Libros) {
@@ -99,9 +83,7 @@ getLibroById(idLibro: string): Observable<Libros> {
   return this.firestore.collection('libros').doc(idLibro).valueChanges() as Observable<Libros>;
 }
 
-
 //--------STREAMING--------//
-
 
  //Obtengo todos los streamings por usuario
  getStreaming(): Observable<Streaming[]> {
@@ -116,7 +98,6 @@ getLibroById(idLibro: string): Observable<Libros> {
 
   }
 
-  
   // Método para subir una imagen al storage de streaming
   async subirImagenYObtenerURLStreaming(foto: string, nombre: string): Promise<string> {
     const storageRefStreaming = ref(this.storage, `streaming/${nombre}`);
@@ -156,7 +137,6 @@ getLibroById(idLibro: string): Observable<Libros> {
 
   //--------DEPORTES--------//
 
-
  //Obtengo todos los deportes por usuario
  getDeportes(): Observable<Deportes[]> {
   return this.firestore.collection<Deportes>(this.coleccionDeportes, ref => 
@@ -170,7 +150,6 @@ getLibroById(idLibro: string): Observable<Libros> {
 
   }
 
-  
   // Método para subir una imagen al storage de deporte
   async subirImagenYObtenerURLDeportes(foto: string, nombre: string): Promise<string> {
     const storageRefDeporte = ref(this.storage, `deporte/${nombre}`);
@@ -224,7 +203,6 @@ getLibroById(idLibro: string): Observable<Libros> {
 
   }
 
-  
   // Método para subir una imagen al storage de arte
   async subirImagenYObtenerURLArte(foto: string, nombre: string): Promise<string> {
     const storageRefArte = ref(this.storage, `artes/${nombre}`);
@@ -248,14 +226,12 @@ getLibroById(idLibro: string): Observable<Libros> {
   // Modifico información arte
   actualizarArte(artes: Arte) {
     return this.firestore.collection('artes').doc(artes.idArte).update({
-
       nombreArte: artes.nombreArte,
       imagenArteURL: artes.imagenArteURL,
       descripcionArte: artes.descripcionArte,
       valoracionArte: artes.valoracionArte,
       materialesArte: artes.materialesArte,
       fotoCamaraArte: artes.fotoCamaraArte,
-
     });
   }
 
@@ -279,7 +255,6 @@ getLibroById(idLibro: string): Observable<Libros> {
   
     }
   
-    
     // Método para subir una imagen al storage de juegos
     async subirImagenYObtenerURLJuego(foto: string, nombre: string): Promise<string> {
       const storageRefJuego = ref(this.storage, `juegos/${nombre}`);
@@ -303,14 +278,12 @@ getLibroById(idLibro: string): Observable<Libros> {
     // Modifico información del juego
     actualizarJuego(juegos: Juego) {
       return this.firestore.collection('juegos').doc(juegos.idJuego).update({
-  
         nombreJuego: juegos.nombreJuego,
         imagenJuegoURL: juegos.imagenJuegoURL,
         descripcionJuego: juegos.descripcionJuego,
         valoracionJuego: juegos.valoracionJuego,
         formatoJuego: juegos.formatoJuego,
         fotoCamaraJuego: juegos.fotoCamaraJuego,
-  
       });
     }
   
@@ -318,11 +291,5 @@ getLibroById(idLibro: string): Observable<Libros> {
     getJuegoById(idJuego: string): Observable<Juego> {
       return this.firestore.collection('juegos').doc(idJuego).valueChanges() as Observable<Juego>;
     }
-
-
- 
-
-
-
 
 }

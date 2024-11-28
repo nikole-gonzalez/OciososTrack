@@ -25,7 +25,7 @@ export class EditarjuegoPage implements OnInit {
         this.firebaseOciososService.getJuegoById(idJuego).subscribe(juegoData => {
           if (juegoData) {
             this.juego = juegoData as Juego;
-            this.juego.idJuego = idJuego; // Asegúrate de asignar el ID al objeto
+            this.juego.idJuego = idJuego; 
           } else {
             console.error("No se encontró el Juego con el ID:", idJuego);
           }
@@ -56,7 +56,6 @@ export class EditarjuegoPage implements OnInit {
       console.error('Error al actualizar Juego: ', error);
     });
   }
-
   
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
@@ -92,8 +91,6 @@ export class EditarjuegoPage implements OnInit {
     this.seleccionarImagen(CameraSource.Photos);
   }
 
-
-  
   clearInput(field: string) {
     switch (field) {
       case 'imagenArteURL':

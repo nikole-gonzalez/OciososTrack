@@ -35,7 +35,6 @@ export class ListadoSeriesPage implements OnInit {
     });
   }
   
-
   editarStreaming(idStreaming: string) {
     if (idStreaming) {
       this.router.navigate(['/editarstreaming', idStreaming]);  // Navegar a la página de edición con el ID del streaming
