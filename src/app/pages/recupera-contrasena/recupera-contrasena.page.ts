@@ -31,14 +31,12 @@ export class RecuperaContrasenaPage implements OnInit {
   }
 
   // Función que valida el correo
-
   validaCorreo(correo: string): boolean {
     const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Expresión regular para validar correo
     return patron.test(correo);
   }
 
   // Función de navegación 
-
   redirigeLogin() {
     if (this.validaRecupera(this.recuperaContrasena)) {
       if (this.validaCorreo(this.recuperaContrasena.recuperaCorreo)) {
@@ -53,7 +51,6 @@ export class RecuperaContrasenaPage implements OnInit {
   }
 
   //Función del toast 
-  
   async presentToast(position: 'top' | 'middle' | 'bottom', mensajeToast: string) {
     const toast = await this.toastController.create({
       message: mensajeToast,

@@ -18,14 +18,6 @@ export class EditarstreamingPage implements OnInit {
   constructor(private route : ActivatedRoute, private firebaseOciososService : FirebaseOciososService,
     private toastController : ToastController, private router : Router) { }
 
-    /*
-  ngOnInit() {
-    const idStreaming = this.route.snapshot.paramMap.get('idStreaming');
-    this.firebaseOciososService.getStreamingById(idStreaming || "" ).subscribe(streamingData => {
-      this.streaming = streamingData as Streaming;  // Forzar el tipo de libroData a Libros
-    });
-  }*/
-
     ngOnInit() {
       const idStreaming = this.route.snapshot.paramMap.get('idStreaming');
       console.log("ID del Streaming:", idStreaming); // Verifica que se muestra el ID correcto
@@ -44,7 +36,6 @@ export class EditarstreamingPage implements OnInit {
       }
     }
     
-
   actualizarStreaming() {
 
     if (!this.streaming.imagenStreamingURL || !this.streaming.tituloStreaming || !this.streaming.plataformaStreaming || !this.streaming.comentarioStreaming || !this.streaming.fotoStreaming ||
@@ -66,8 +57,7 @@ export class EditarstreamingPage implements OnInit {
       console.error('Error al actualizar el streaming: ', error);
     });
   }
-
-  
+ 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -87,7 +77,6 @@ export class EditarstreamingPage implements OnInit {
         break;
     }}
   
-
   async seleccionarImagen(source: CameraSource) {
     try {
       const image = await Camera.getPhoto({
@@ -112,6 +101,5 @@ export class EditarstreamingPage implements OnInit {
   abrirGaleria() {
     this.seleccionarImagen(CameraSource.Photos);
   }
-
 
 }

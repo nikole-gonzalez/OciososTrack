@@ -24,7 +24,6 @@ export class RegistroartePage implements OnInit {
   fotoCamaraArte = "";
   userId= "";
 
-
   constructor(private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router : Router ) { }
 
   ngOnInit() {
@@ -121,9 +120,6 @@ export class RegistroartePage implements OnInit {
   abrirGaleria() {
     this.seleccionarImagen(CameraSource.Photos);
   }
-
-
-
 
 }
 

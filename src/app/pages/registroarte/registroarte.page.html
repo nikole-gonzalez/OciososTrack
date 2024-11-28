@@ -53,12 +53,10 @@
         <ion-label position="floating">Foto:</ion-label>
         <ion-input [(ngModel)]="fotoCamaraArte" type="text"></ion-input>
         <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <!--<ion-button (click)="abrirGaleria()">Abrir Galería</ion-button>-->
         <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
       </ion-item>
       <ion-text color="danger" *ngIf="!fotoCamaraArte && formTouched">La foto es obligatoria.</ion-text>
       <br>
-
       <ion-button  (click)="agregarArte()"> Guardar Manualidad </ion-button>
 
     </ion-card-content>

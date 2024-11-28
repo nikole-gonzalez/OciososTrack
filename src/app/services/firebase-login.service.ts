@@ -1,9 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth} from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
 import { User} from 'firebase/auth';
-import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,13 +12,6 @@ export class FirebaseLoginService {
   User: User | null = null;
 
     constructor (public ngFireAuth : AngularFireAuth, private firestore : AngularFirestore){}
-
-    //por si
-    /*
-    async registerUser (email:string, password:string){
-      return await this.ngFireAuth.createUserWithEmailAndPassword(email, password)
-
-    }*/
 
       async registerUser(email: string, password: string, nombre: string) {
         const userCredential = await this.ngFireAuth.createUserWithEmailAndPassword(email, password);
@@ -62,11 +53,7 @@ export class FirebaseLoginService {
       })
     } 
 
-    
-
-  //NUEVO  
   // Método para obtener la información del usuario autenticado
-  
   
   async gObtenerUsuarioActual(): Promise<User | null> {
     return (await this.ngFireAuth.currentUser) as User | null;
@@ -77,7 +64,6 @@ export class FirebaseLoginService {
     return userDoc?.data();
   }
   
-
 }
   
 

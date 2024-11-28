@@ -23,25 +23,6 @@ export class EditarlibrosPage implements OnInit {
     private router : Router
   ) { }
 
-  /*ngOnInit() {
-    
-    this.firebaseOciososService.getLibroById(this.idLibro).subscribe(libroData => {
-      console.log(libroData);
-      if (libroData) {
-        this.libro = new Libros(
-          libroData.imagenLibroURL || '',
-          libroData.tituloLibro,
-          libroData.autorLibro,
-          libroData.comentarioLibro,
-          libroData.valoracionLibro,
-          libroData.fotoCamaraLibro || '',
-          libroData.userId || '',
-          this.idLibro
-        );
-      }
-    });
-  }*/
-
   ngOnInit() { 
     const idLibro = this.route.snapshot.paramMap.get('idLibro');
     this.firebaseOciososService.getLibroById(idLibro || "" ).subscribe(libroData => {
@@ -49,25 +30,6 @@ export class EditarlibrosPage implements OnInit {
     });
   }
  
-
-/*MIO
-actualizarLibro() {
-  if (!this.libro.tituloLibro || !this.libro.autorLibro) {
-    this.presentToast('Faltan datos del libro');
-    return;
-  }
-
-  this.firebaseOciososService.actualizarLibro(this.idLibro, this.libro)
-    .then(() => {
-      this.presentToast('Libro actualizado con éxito');
-      this.router.navigate(['/listado']);
-    })
-    .catch(error => {
-      this.presentToast('Error al actualizar el libro');
-      console.error('Error:', error);
-    });*/
-
-  //NO FUINCIONA 1
   actualizarLibro() {
 
     if (!this.libro.tituloLibro || !this.libro.autorLibro || !this.libro.comentarioLibro || 
@@ -89,24 +51,6 @@ actualizarLibro() {
       console.error('Error al actualizar el libro: ', error);
     });
   }
-
-  /*actualizarLibro() {
-    if (!this.libro.tituloLibro || !this.libro.autorLibro) {
-      this.presentToast('Faltan datos del libro');
-      return;
-    }
-  
-    this.firebaseOciososService.actualizarLibro(this.libro.idLibro, this.libro)
-      .then(() => {
-        this.presentToast('Libro actualizado con éxito');
-        this.router.navigate(['/listado']);
-      })
-      .catch(error => {
-        this.presentToast('Error al actualizar el libro');
-        console.error('Error:', error);
-      });
-  }
-*/  
 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
@@ -151,7 +95,5 @@ actualizarLibro() {
           this.libro.fotoCamaraLibro = '';
         break;
     }}
-
-    
 
 }

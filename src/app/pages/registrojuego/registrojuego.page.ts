@@ -21,7 +21,6 @@ export class RegistrojuegoPage implements OnInit {
   fotoCamaraJuego = "";
   userId= "";
 
-
   constructor(private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router: Router) { }
 
   ngOnInit() {

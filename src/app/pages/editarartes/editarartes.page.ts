@@ -18,7 +18,6 @@ export class EditarartesPage implements OnInit {
   constructor(private route: ActivatedRoute, private firebaseOciososService: FirebaseOciososService,
     private toastController : ToastController, private router: Router) { }
 
-
     ngOnInit() {
       const idArte = this.route.snapshot.paramMap.get('idArte');
       console.log("ID del Arte:", idArte); // Verifica que se muestra el ID correcto
@@ -27,7 +26,7 @@ export class EditarartesPage implements OnInit {
         this.firebaseOciososService.getArteById(idArte).subscribe(arteData => {
           if (arteData) {
             this.arte = arteData as Arte;
-            this.arte.idArte = idArte; // Asegúrate de asignar el ID al objeto
+            this.arte.idArte = idArte; 
           } else {
             console.error("No se encontró el Arte con el ID:", idArte);
           }
@@ -58,8 +57,7 @@ export class EditarartesPage implements OnInit {
       console.error('Error al actualizar Arte: ', error);
     });
   }
-
-  
+ 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -93,8 +91,6 @@ export class EditarartesPage implements OnInit {
   abrirGaleria() {
     this.seleccionarImagen(CameraSource.Photos);
   }
-
-
   
   clearInput(field: string) {
     switch (field) {
@@ -105,8 +101,6 @@ export class EditarartesPage implements OnInit {
           this.arte.fotoCamaraArte = '';
         break;
     }}
-
-
 
 }
 

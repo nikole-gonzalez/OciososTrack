@@ -40,33 +40,6 @@ export class LoginPage implements OnInit, AfterViewInit {
     return this.loginForm.controls;
   }
 
-  /*async login (){
-    if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
-      this.presentToast("top", "Correo no válido");
-    } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
-      this.presentToast("top", "La contraseña no coincide");
-    } else {
-      const loading = await this.loadingCtrl.create({
-        duration:3000
-      });
-      await loading.present();
-      const user = await this.authService.loginUser(this.loginForm.value.correoLogin, this.loginForm.value.contrasenaLogin).catch((error) =>{
-        console.log(error);
-        loading.dismiss()
-      })
-
-      if (user){
-        loading.dismiss()
-        this.router.navigate(['/home'])
-      }else{
-        console.log('Ingrese datos correctos')
-        this.presentToast("top", "Correo o contraseña no válida");
-
-      }
-    }
-
-  }*/
-
     async login() {
       if(!this.validaCorreoLogin(this.loginForm.value.correoLogin)) {
         this.presentToast("top", "Correo no válido");
@@ -105,7 +78,6 @@ export class LoginPage implements OnInit, AfterViewInit {
   }
 
   //Función del Toast 
-
   async presentToast(position: 'top' | 'middle' | 'bottom', mensajeToast: string) {
     const toast = await this.toastController.create({
       message: mensajeToast,
@@ -117,7 +89,6 @@ export class LoginPage implements OnInit, AfterViewInit {
   }
 
   //Función de animación ionic 
-
   createAnimation() {
     const imgLoginAnimation = this.animationController
       .create()
@@ -137,7 +108,6 @@ export class LoginPage implements OnInit, AfterViewInit {
     this.animation.play();
   }
 
-
   validaCorreoLogin(correo: string): boolean {
     const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Expresión regular para validar correo
     return patron.test(correo);
@@ -150,41 +120,8 @@ export class LoginPage implements OnInit, AfterViewInit {
     return contrasena.length >= 6 && patronMayuscula.test(contrasena);
   }
 
-
-
   ngAfterViewInit() {
     this.createAnimation();
   }
-
-
- /*
-
-  //Función que permite ingresar a la aplicación. 
-
-  ingresarLogin() {
-    if (this.validaModeloLogin(this.login)) {
-      if (!this.validaNombreUsuario(this.loginForm.value.nombreLogin)) {
-        this.presentToast("top", "El nombre de usuario debe tener al menos 3 caracteres");
-      } else if (!this.validaContrasena(this.loginForm.value.contrasenaLogin)) {
-        this.presentToast("top", "La contraseña debe tener al menos 6 caracteres y una mayúscula");
-      } else {
-        // Simulamos recibir un token desde el servidor
-        //const tokenSimulado = 'mi-token-de-autenticacion';
-        
-        // Guardamos el token en localStorage usando el servicio de autenticación
-        //this.authlocal.gInicioSesion(tokenSimulado);
-
-        // Navegamos al home
-        this.loginFirebase.login(this.login.nombreLogin, this.login.contrasenaLogin).then(()=>{
-          this.router.navigate(['/home'])
-          this.presentToast("top", "Bienvenido ");
-        })
-       
-      }
-    } else { 
-      this.presentToast("top", "Faltan datos por completar");
-    }
-  }
-*/
 
 }

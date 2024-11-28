@@ -52,7 +52,6 @@ export class ListadoJuegoPage implements OnInit {
     });
   }
 
-
   segmentChanged($event:any){
     console.log($event);
     let direccion = $event.detail.value;
