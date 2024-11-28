@@ -11,5 +11,12 @@ ion-item{
     background: rgb(116, 155, 194);
 }
 
+.center-buttons {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    gap: 10px;                
+  }
+  
 
 

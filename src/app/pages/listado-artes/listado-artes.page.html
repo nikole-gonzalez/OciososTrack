@@ -35,8 +35,10 @@
             <img [src]="arte.fotoCamaraArte" alt="Imagen del arte" />
           </ion-thumbnail>
         </ion-item>
+        <div class="center-buttons">
         <ion-button (click)="editarArtes(arte.idArte)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarArte(arte.idArte)">Eliminar</ion-button>
+        </div>
       </ion-list>
     </ion-card-content>
   </ion-card>

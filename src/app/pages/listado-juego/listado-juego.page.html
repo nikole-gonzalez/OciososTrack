@@ -33,8 +33,10 @@
             <img [src]="juego.fotoCamaraJuego" alt="Imagen del juego" />
           </ion-thumbnail>
         </ion-item>
+        <div class="center-buttons">
         <ion-button (click)="editarJuegos(juego.idJuego)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarJuego(juego.idJuego)">Eliminar</ion-button>
+        </div>
       </ion-list>
     </ion-card-content>
   </ion-card>

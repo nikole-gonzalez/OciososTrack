@@ -38,8 +38,10 @@
             <img [src]="deporte.fotoCamaraDeporte" alt="Imagen del Deporte" />
           </ion-thumbnail>
         </ion-item>
+        <div class="center-buttons">
         <ion-button (click)="editarDeporte(deporte.idDeporte)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarDeporte(deporte.idDeporte)">Eliminar</ion-button>
+        </div>
       </ion-list>
     </ion-card-content>
   </ion-card>
