@@ -16,27 +16,6 @@ export class UsuarioComponent  implements OnInit {
   
   constructor(private router : Router, private firebaseLogin : FirebaseLoginService, private firestore : AngularFirestore, public authLocalService : AuthlocalService ) { }
 
-  
-  
-  /*async obtenerUsuario(): Promise<void> {
-    this.usuario = await this.firebaseLogin.gObtenerUsuarioActual();
-  }*/
-
-    /*ngOnInit(): void {
-      this.obtenerUsuario();
-    }
-  
-    async obtenerUsuario(): Promise<void> {
-      // Obtener el usuario actual de Firebase
-      const user = await this.firebaseLogin.gObtenerUsuarioActual();
-      if (user && user.uid) {
-        // Si tenemos el UID, llamar a obtenerDatosUsuario con el UID
-        this.usuario = await this.obtenerDatosUsuario(user.uid);
-      } else {
-        console.error('No se pudo obtener el usuario actual o el UID');
-      }
-    } */
-
       async ngOnInit() {
         try {
           this.loading = true;
