@@ -17,7 +17,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item style="justify-content: center;">
-          <img [src]="streaming.imagenStreamingURL" alt="Imagen del streaming" />
+          <img [src]="streaming.fotoStreaming" alt="Imagen del streaming" />
         </ion-item>
         <ion-item>
           <ion-label>Plataforma: {{ streaming.plataformaStreaming }} </ion-label>
@@ -28,11 +28,7 @@
         <ion-item>
           <ion-label>Comentario: {{ streaming.comentarioStreaming }}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [src]="streaming.fotoStreaming" alt="Imagen del streaming" />
-          </ion-thumbnail>
-        </ion-item>
+        
         <div class="center-buttons">
         <ion-button (click)="editarStreaming(streaming.idStreaming)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarStreaming(streaming.idStreaming)">Eliminar</ion-button>

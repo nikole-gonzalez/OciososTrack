@@ -12,7 +12,7 @@ import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 })
 export class EditarartesPage implements OnInit {
 
-  arte: Arte = new Arte ('','','',0,'','','')
+  arte: Arte = new Arte ('','','',0,'','')
   idArte: string;
 
   constructor(private route: ActivatedRoute, private firebaseOciososService: FirebaseOciososService,
@@ -38,7 +38,7 @@ export class EditarartesPage implements OnInit {
     
   actualizarArte() {
 
-    if (!this.arte.nombreArte || !this.arte.descripcionArte || !this.arte.imagenArteURL || !this.arte.fotoCamaraArte || !this.arte.materialesArte ||
+    if (!this.arte.nombreArte || !this.arte.descripcionArte || !this.arte.fotoCamaraArte || !this.arte.materialesArte ||
       this.arte.valoracionArte === null || this.arte.valoracionArte === undefined) {
     this.presentToast('Todos los campos son obligatorios');
     return;
@@ -94,11 +94,8 @@ export class EditarartesPage implements OnInit {
   
   clearInput(field: string) {
     switch (field) {
-      case 'imagenArteURL':
-        this.arte.imagenArteURL = '';
-        break;
-        case 'fotoCamaraArte':
-          this.arte.fotoCamaraArte = '';
+      case 'fotoCamaraArte':
+        this.arte.fotoCamaraArte = '';
         break;
     }}
 

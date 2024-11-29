@@ -12,7 +12,7 @@ import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 })
 export class EditarjuegoPage implements OnInit {
 
-  juego: Juego = new Juego ('','','',0,'','','')
+  juego: Juego = new Juego ('','','',0,'','')
   idArte: string;
 
   constructor(private route: ActivatedRoute, private firebaseOciososService: FirebaseOciososService, private toastController: ToastController, private router: Router) { }
@@ -37,7 +37,7 @@ export class EditarjuegoPage implements OnInit {
 
   actualizarJuego() {
 
-    if (!this.juego.nombreJuego || !this.juego.descripcionJuego || !this.juego.imagenJuegoURL || !this.juego.fotoCamaraJuego || !this.juego.formatoJuego ||
+    if (!this.juego.nombreJuego || !this.juego.descripcionJuego || !this.juego.fotoCamaraJuego || !this.juego.formatoJuego ||
       this.juego.valoracionJuego === null || this.juego.valoracionJuego === undefined) {
     this.presentToast('Todos los campos son obligatorios');
     return;
@@ -93,11 +93,8 @@ export class EditarjuegoPage implements OnInit {
 
   clearInput(field: string) {
     switch (field) {
-      case 'imagenArteURL':
-        this.juego.imagenJuegoURL = '';
-        break;
-        case 'fotoCamaraArte':
-          this.juego.fotoCamaraJuego = '';
+      case 'fotoCamaraArte':
+        this.juego.fotoCamaraJuego = '';
         break;
     }}
 

@@ -12,8 +12,10 @@
     <ion-card-content>
 
       <ion-item>
-        <ion-label position="floating">Imagen URL: </ion-label>
-        <ion-input [(ngModel)]="arte.imagenArteURL" type="text" (ionFocus)="clearInput('imagenArteURL')"></ion-input>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="arte.fotoCamaraArte" type="text" (ionFocus)="clearInput('fotoCamaraArte')"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
       </ion-item>
       
       <ion-item>
@@ -35,15 +37,7 @@
         <ion-label position="floating">Valoración: </ion-label>
         <ion-input [(ngModel)]="arte.valoracionArte" type="number"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Foto:</ion-label>
-        <ion-input [(ngModel)]="arte.fotoCamaraArte" type="text" (ionFocus)="clearInput('fotoCamaraArte')"></ion-input>
-        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
-      </ion-item>
       <br>
-
       <ion-button expand="block" (click)="actualizarArte()">Actualizar Manualidad </ion-button>
 
     </ion-card-content>

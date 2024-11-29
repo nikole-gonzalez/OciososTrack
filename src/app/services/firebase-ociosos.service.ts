@@ -64,11 +64,11 @@ export class FirebaseOciososService {
   actualizarLibro(libro: Libros) {
     return this.firestore.collection('libros').doc(libro.idLibro).update({
       tituloLibro: libro.tituloLibro,
-      imagenLibroURL: libro.imagenLibroURL,
+      fotoCamaraLibro: libro.fotoCamaraLibro,
       autorLibro: libro.autorLibro,
       comentarioLibro: libro.comentarioLibro,
       valoracionLibro: libro.valoracionLibro,
-      fotoCamaraLibro: libro.fotoCamaraLibro
+      
     });
   }
     
@@ -122,11 +122,11 @@ getLibroById(idLibro: string): Observable<Libros> {
   actualizarStreaming(streaming: Streaming) {
     return this.firestore.collection('streaming').doc(streaming.idStreaming).update({
       tituloStreaming: streaming.tituloStreaming,
-      imagenStreamingURL: streaming.imagenStreamingURL,
+      fotoStreaming: streaming.fotoStreaming,
       plataformaStreaming: streaming.plataformaStreaming,
       comentarioStreaming: streaming.comentarioStreaming,
       valoracionStreaming: streaming.valoracionStreaming,
-      fotoStreaming: streaming.fotoStreaming
+      
     });
   }
 
@@ -174,11 +174,11 @@ getLibroById(idLibro: string): Observable<Libros> {
   actualizarDeporte(deporte: Deportes) {
     return this.firestore.collection('deportes').doc(deporte.idDeporte).update({
       nombreDeporte: deporte.nombreDeporte,
-      imagenDeporteURL: deporte.imagenDeporteURL,
+      fotoCamaraDeporte: deporte.fotoCamaraDeporte,
       lugarDeporte: deporte.lugarDeporte,
       comentarioDeporte: deporte.comentarioDeporte,
       valoracionEntrenamiento: deporte.valoracionEntrenamiento,
-      fotoCamaraDeporte: deporte.fotoCamaraDeporte,
+      
       fechaDeporte : deporte.fechaDeporte
     });
   }
@@ -227,11 +227,10 @@ getLibroById(idLibro: string): Observable<Libros> {
   actualizarArte(artes: Arte) {
     return this.firestore.collection('artes').doc(artes.idArte).update({
       nombreArte: artes.nombreArte,
-      imagenArteURL: artes.imagenArteURL,
+      fotoCamaraArte: artes.fotoCamaraArte,
       descripcionArte: artes.descripcionArte,
       valoracionArte: artes.valoracionArte,
       materialesArte: artes.materialesArte,
-      fotoCamaraArte: artes.fotoCamaraArte,
     });
   }
 
@@ -279,11 +278,10 @@ getLibroById(idLibro: string): Observable<Libros> {
     actualizarJuego(juegos: Juego) {
       return this.firestore.collection('juegos').doc(juegos.idJuego).update({
         nombreJuego: juegos.nombreJuego,
-        imagenJuegoURL: juegos.imagenJuegoURL,
+        fotoCamaraJuego: juegos.fotoCamaraJuego,
         descripcionJuego: juegos.descripcionJuego,
         valoracionJuego: juegos.valoracionJuego,
         formatoJuego: juegos.formatoJuego,
-        fotoCamaraJuego: juegos.fotoCamaraJuego,
       });
     }
   

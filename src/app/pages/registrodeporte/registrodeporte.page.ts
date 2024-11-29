@@ -16,12 +16,11 @@ defineCustomElements(window);
 export class RegistrodeportePage implements OnInit {
   formTouched = false;
 
-  imagenDeporteURL = "";
+  fotoCamaraDeporte = "";
   nombreDeporte = "";
   lugarDeporte = "";
   comentarioDeporte = "";
   valoracionEntrenamiento = 0;
-  fotoCamaraDeporte = "";
   fechaDeporte = "";
   userId ="";
 
@@ -34,7 +33,7 @@ export class RegistrodeportePage implements OnInit {
     this.formTouched = true; // Marca el formulario como tocado
   
     // Validación de campos obligatorios
-    if (!this.nombreDeporte || !this.lugarDeporte || !this.comentarioDeporte || !this.fechaDeporte || !this.imagenDeporteURL || !this.fotoCamaraDeporte) {
+    if (!this.nombreDeporte || !this.lugarDeporte || !this.comentarioDeporte || !this.fechaDeporte || !this.fotoCamaraDeporte) {
       this.presentToast('top', 'Todos los campos son obligatorios');
       return;
     }
@@ -53,12 +52,11 @@ export class RegistrodeportePage implements OnInit {
           this.fotoCamaraDeporte = urlImagen;
   
           const nuevoDeporte = new Deportes(
-            this.imagenDeporteURL,
+            this.fotoCamaraDeporte,
             this.nombreDeporte,
             this.lugarDeporte,
             this.comentarioDeporte,
             this.valoracionEntrenamiento,
-            this.fotoCamaraDeporte,
             this.fechaDeporte,
             this.userId,
           );
@@ -92,12 +90,11 @@ export class RegistrodeportePage implements OnInit {
   }
 
   limpiarFormulario() {
-    this.imagenDeporteURL = "";
+    this.fotoCamaraDeporte = "";
     this.nombreDeporte = "";
     this.lugarDeporte = "";
     this.comentarioDeporte = "";
     this.valoracionEntrenamiento = 0;
-    this.fotoCamaraDeporte = "";
     this.fechaDeporte = "";
     
   }

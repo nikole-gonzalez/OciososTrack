@@ -18,10 +18,12 @@
     <ion-card-content>
       
       <ion-item>
-        <ion-label position="floating">IMAGEN URL: </ion-label>
-        <ion-input [(ngModel)]="imagenLibroURL" type="img"></ion-input>
-      </ion-item> 
-      <ion-text color="danger" *ngIf="!imagenLibroURL && formTouched">La imagen obligatoria.</ion-text>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="fotoCamaraLibro" type="text"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!fotoCamaraLibro && formTouched">La foto es obligatoria.</ion-text>
                 
       <ion-item>
         <ion-label position="floating">Título: </ion-label>
@@ -48,17 +50,7 @@
       <ion-text color="danger" *ngIf="(valoracionLibro < 1 || valoracionLibro > 10) && formTouched">
         La valoración debe estar entre 1 y 10.
       </ion-text>
-
-      <ion-item>
-        <ion-label position="floating">Foto:</ion-label>
-        <ion-input [(ngModel)]="fotoCamaraLibro" type="text"></ion-input>
-        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
-      </ion-item>
-      <ion-text color="danger" *ngIf="!fotoCamaraLibro && formTouched">La foto es obligatoria.</ion-text>
-
       <br>
-
       <ion-button (click)="agregarLibros()"> Guardar Lectura </ion-button>
-
+      <br>
     </ion-card-content>

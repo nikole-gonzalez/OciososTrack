@@ -13,7 +13,7 @@ import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 })
 export class EditarlibrosPage implements OnInit {
 
-  libro: Libros = new Libros('', '', '', '', 0, '', '');
+  libro: Libros = new Libros('', '', '', '', 0, '');
   idLibro: string;
   
 
@@ -88,11 +88,8 @@ export class EditarlibrosPage implements OnInit {
 
   clearInput(field: string) {
     switch (field) {
-      case 'imagenLibroURL':
-        this.libro.imagenLibroURL = '';
-        break;
-        case 'fotoCamaraLibro':
-          this.libro.fotoCamaraLibro = '';
+      case 'fotoCamaraLibro':
+        this.libro.fotoCamaraLibro = '';
         break;
     }}
 

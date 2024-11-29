@@ -16,12 +16,11 @@ defineCustomElements(window);
 export class RegistroartePage implements OnInit {
   formTouched = false;
 
-  imagenArteURL = "";
+  fotoCamaraArte = "";
   nombreArte = "";
   descripcionArte = "";
   valoracionArte = 0;
   materialesArte = "";
-  fotoCamaraArte = "";
   userId= "";
 
   constructor(private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router : Router ) { }
@@ -32,7 +31,7 @@ export class RegistroartePage implements OnInit {
   agregarArte() {
     this.formTouched = true; // Marca el formulario como tocado
       // Validación de campos obligatorios
-    if (!this.imagenArteURL || !this.nombreArte || !this.descripcionArte || !this.valoracionArte || !this.materialesArte || !this.fotoCamaraArte) {
+    if (!this.fotoCamaraArte || !this.nombreArte || !this.descripcionArte || !this.valoracionArte || !this.materialesArte) {
       this.presentToast('top', 'Todos los campos son obligatorios');
       return;
     }
@@ -51,12 +50,11 @@ export class RegistroartePage implements OnInit {
             this.fotoCamaraArte = urlImagen;
     
             const nuevoArte = new Arte(
-              this.imagenArteURL,
+              this.fotoCamaraArte,
               this.nombreArte,
               this.descripcionArte,
               this.valoracionArte,
               this.materialesArte,
-              this.fotoCamaraArte,
               this.userId,
             );
     
@@ -87,13 +85,11 @@ export class RegistroartePage implements OnInit {
   }
 
   limpiarFormulario() {
-    this.imagenArteURL = "";
+    this.fotoCamaraArte = "";
     this.nombreArte = "";
     this.descripcionArte = "";
     this.valoracionArte = 0;
     this.materialesArte = "";
-    this.fotoCamaraArte = "";
-    
   }
 
   async seleccionarImagen(source: CameraSource) {

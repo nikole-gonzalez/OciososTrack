@@ -17,7 +17,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item style="justify-content: center;">
-          <img [src]="deporte.imagenDeporteURL" alt="Imagen del Deporte" />
+          <img [src]="deporte.fotoCamaraDeporte" alt="Imagen del Deporte" />
         </ion-item>
         <ion-item>
           <ion-label>Lugar: {{ deporte.lugarDeporte }} </ion-label>
@@ -30,11 +30,6 @@
         </ion-item>
         <ion-item>
           <ion-label>Fecha: {{ deporte.fechaDeporte }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [src]="deporte.fotoCamaraDeporte" alt="Imagen del Deporte" />
-          </ion-thumbnail>
         </ion-item>
         <div class="center-buttons">
         <ion-button (click)="editarDeporte(deporte.idDeporte)">Editar</ion-button>

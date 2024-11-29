@@ -13,12 +13,11 @@ import { FirebaseOciososService } from 'src/app/services/firebase-ociosos.servic
 export class RegistrojuegoPage implements OnInit {
   formTouched = false;
 
-  imagenJuegoURL = "";
+  fotoCamaraJuego = "";
   nombreJuego = "";
   descripcionJuego = "";
   valoracionJuego = 0;
   formatoJuego = "";
-  fotoCamaraJuego = "";
   userId= "";
 
   constructor(private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router: Router) { }
@@ -29,7 +28,7 @@ export class RegistrojuegoPage implements OnInit {
   agregarJuego() {
     this.formTouched = true; // Marca el formulario como tocado
       // Validación de campos obligatorios
-    if (!this.imagenJuegoURL || !this.nombreJuego || !this.descripcionJuego || !this.valoracionJuego || !this.formatoJuego || !this.fotoCamaraJuego) {
+    if (!this.fotoCamaraJuego|| !this.nombreJuego || !this.descripcionJuego || !this.valoracionJuego || !this.formatoJuego) {
       this.presentToast('top', 'Todos los campos son obligatorios');
       return;
     }
@@ -48,12 +47,11 @@ export class RegistrojuegoPage implements OnInit {
             this.fotoCamaraJuego = urlImagen;
     
             const nuevoJuego = new Juego(
-              this.imagenJuegoURL,
+              this.fotoCamaraJuego,
               this.nombreJuego,
               this.descripcionJuego,
               this.valoracionJuego,
               this.formatoJuego,
-              this.fotoCamaraJuego,
               this.userId,
             );
     
@@ -84,13 +82,11 @@ export class RegistrojuegoPage implements OnInit {
   }
 
   limpiarFormulario() {
-    this.imagenJuegoURL = "";
+    this.fotoCamaraJuego = "";
     this.nombreJuego = "";
     this.descripcionJuego = "";
     this.valoracionJuego = 0;
     this.formatoJuego = "";
-    this.fotoCamaraJuego = "";
-    
   }
 
   async seleccionarImagen(source: CameraSource) {

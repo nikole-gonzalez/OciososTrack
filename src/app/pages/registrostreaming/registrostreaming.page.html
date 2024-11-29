@@ -18,10 +18,12 @@
     <ion-card-content>
       
       <ion-item>
-        <ion-label position="floating">IMAGEN URL: </ion-label>
-        <ion-input [(ngModel)]="imagenStreamingURL" type="img"></ion-input>
-      </ion-item> 
-      <ion-text color="danger" *ngIf="!imagenStreamingURL && formTouched">La imagen obligatoria.</ion-text>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="fotoStreaming" type="text"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!fotoStreaming && formTouched">La foto es obligatoria.</ion-text>
                 
       <ion-item>
         <ion-label position="floating">Título: </ion-label>
@@ -49,15 +51,7 @@
         La valoración debe estar entre 1 y 10.
       </ion-text>
 
-      <ion-item>
-        <ion-label position="floating">Foto:</ion-label>
-        <ion-input [(ngModel)]="fotoStreaming" type="text"></ion-input>
-        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
-      </ion-item>
-      <ion-text color="danger" *ngIf="!fotoStreaming && formTouched">La foto es obligatoria.</ion-text>
       <br>
-
       <ion-button (click)="agregarStreaming()"> Guardar Streaming </ion-button>
-
+      <br>
     </ion-card-content>
