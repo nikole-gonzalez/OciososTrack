@@ -16,12 +16,11 @@ defineCustomElements(window);
 export class RegistrolibrosPage implements OnInit {
   formTouched = false;
 
-  imagenLibroURL ="";
+  fotoCamaraLibro= "";
   tituloLibro ="";
   autorLibro ="";
   comentarioLibro ="";
   valoracionLibro =0;
-  fotoCamaraLibro= "";
   userId ="";
 
   constructor( private firebaseOciososService: FirebaseOciososService, public toastController: ToastController, public router: Router) { }
@@ -32,7 +31,7 @@ export class RegistrolibrosPage implements OnInit {
     this.formTouched = true; // Marca el formulario como tocado
 
     // Validación de campos obligatorios
-    if (!this.imagenLibroURL || !this.tituloLibro || !this.autorLibro || !this.comentarioLibro || !this.valoracionLibro || !this.fotoCamaraLibro) {
+    if (!this.fotoCamaraLibro || !this.tituloLibro || !this.autorLibro || !this.comentarioLibro || !this.valoracionLibro) {
       this.presentToast('top', 'Todos los campos son obligatorios');
       return;
     }
@@ -51,12 +50,11 @@ export class RegistrolibrosPage implements OnInit {
             this.fotoCamaraLibro = urlImagen;
     
             const nuevoLibro = new Libros(
-              this.imagenLibroURL,
+              this.fotoCamaraLibro,
               this.tituloLibro,
               this.autorLibro,
               this.comentarioLibro,
               this.valoracionLibro,
-              this.fotoCamaraLibro,
               this.userId,
             );
     
@@ -87,12 +85,11 @@ export class RegistrolibrosPage implements OnInit {
   }
 
   limpiarFormulario() {
-    this.imagenLibroURL = "";
+    this.fotoCamaraLibro = "";
     this.tituloLibro = "";
     this.autorLibro = "";
     this.comentarioLibro = "";
     this.valoracionLibro = 0;
-    this.fotoCamaraLibro = "";
   }
 
   async seleccionarImagen(source: CameraSource) {

@@ -17,7 +17,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item style="justify-content: center;">
-          <img [src]="arte.imagenArteURL" alt="Imagen del libro" />
+          <img [src]="arte.fotoCamaraArte" alt="Imagen del libro" />
         </ion-item>
         <ion-item>
           <ion-label>Descripción: {{ arte.descripcionArte }} </ion-label>
@@ -27,11 +27,6 @@
         </ion-item>
         <ion-item>
           <ion-label>Valoración: {{ arte.valoracionArte }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [src]="arte.fotoCamaraArte" alt="Imagen del arte" />
-          </ion-thumbnail>
         </ion-item>
         <div class="center-buttons">
         <ion-button (click)="editarArtes(arte.idArte)">Editar</ion-button>

@@ -16,12 +16,11 @@ defineCustomElements(window);
 export class RegistrostreamingPage implements OnInit {
   formTouched = false;
 
-  imagenStreamingURL ="";
+  fotoStreaming= "";
   tituloStreaming ="";
   plataformaStreaming ="";
   comentarioStreaming ="";
   valoracionStreaming =0;
-  fotoStreaming= "";
   userId ="";
 
 
@@ -34,7 +33,7 @@ export class RegistrostreamingPage implements OnInit {
     this.formTouched = true; // Marca el formulario como tocado
 
     // Validación de campos obligatorios
-    if (!this.imagenStreamingURL || !this.tituloStreaming || !this.plataformaStreaming || !this.comentarioStreaming || !this.valoracionStreaming || !this.fotoStreaming) {
+    if (!this.fotoStreaming|| !this.tituloStreaming || !this.plataformaStreaming || !this.comentarioStreaming || !this.valoracionStreaming) {
       this.presentToast('top', 'Todos los campos son obligatorios');
       return;
     }
@@ -53,12 +52,11 @@ export class RegistrostreamingPage implements OnInit {
             this.fotoStreaming = urlImagen;
     
             const nuevoStreaming = new Streaming(
-              this.imagenStreamingURL,
+              this.fotoStreaming,
               this.tituloStreaming,
               this.plataformaStreaming,
               this.comentarioStreaming,
               this.valoracionStreaming,
-              this.fotoStreaming,
               this.userId,
             );
     
@@ -89,12 +87,11 @@ export class RegistrostreamingPage implements OnInit {
   }
 
   limpiarFormulario() {
-    this.imagenStreamingURL = "";
+    this.fotoStreaming = "";
     this.tituloStreaming = "";
     this.plataformaStreaming = "";
     this.comentarioStreaming = "";
     this.valoracionStreaming = 0;
-    this.fotoStreaming = "";
   }
 
   async seleccionarImagen(source: CameraSource) {

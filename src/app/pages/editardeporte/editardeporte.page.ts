@@ -12,7 +12,7 @@ import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 })
 export class EditardeportePage implements OnInit {
 
-  deporte: Deportes = new Deportes ('', '', '', '', 0, '', '', '')
+  deporte: Deportes = new Deportes ('', '', '', '', 0, '', '')
   idDeporte: string;
 
   constructor(private route: ActivatedRoute, private firebaseOciososService : FirebaseOciososService,
@@ -38,7 +38,7 @@ export class EditardeportePage implements OnInit {
     
   actualizarDeporte() {
 
-    if (!this.deporte.imagenDeporteURL || !this.deporte.nombreDeporte || !this.deporte.lugarDeporte || !this.deporte.comentarioDeporte || !this.deporte.fotoCamaraDeporte || !this.deporte.fechaDeporte ||
+    if (!this.deporte.fotoCamaraDeporte  || !this.deporte.nombreDeporte || !this.deporte.lugarDeporte || !this.deporte.comentarioDeporte || !this.deporte.fechaDeporte ||
       this.deporte.valoracionEntrenamiento === null || this.deporte.valoracionEntrenamiento === undefined) {
     this.presentToast('Todos los campos son obligatorios');
     return;
@@ -94,11 +94,8 @@ export class EditardeportePage implements OnInit {
 
   clearInput(field: string) {
     switch (field) {
-      case 'imagenDeporteURL':
-        this.deporte.imagenDeporteURL = '';
-        break;
-        case 'fotoCamaraDeporte':
-          this.deporte.fotoCamaraDeporte = '';
+      case 'fotoCamaraDeporte':
+        this.deporte.fotoCamaraDeporte = '';
         break;
     }}
 

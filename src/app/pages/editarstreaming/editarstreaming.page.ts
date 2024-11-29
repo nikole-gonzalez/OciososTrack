@@ -12,7 +12,7 @@ import { Camera,CameraResultType,CameraSource } from '@capacitor/camera';
 })
 export class EditarstreamingPage implements OnInit {
 
-  streaming: Streaming = new Streaming('', '', '', '', 0, '', '');
+  streaming: Streaming = new Streaming('', '', '', '', 0, '');
   idStreaming: string;
 
   constructor(private route : ActivatedRoute, private firebaseOciososService : FirebaseOciososService,
@@ -38,7 +38,7 @@ export class EditarstreamingPage implements OnInit {
     
   actualizarStreaming() {
 
-    if (!this.streaming.imagenStreamingURL || !this.streaming.tituloStreaming || !this.streaming.plataformaStreaming || !this.streaming.comentarioStreaming || !this.streaming.fotoStreaming ||
+    if (!this.streaming.fotoStreaming || !this.streaming.tituloStreaming || !this.streaming.plataformaStreaming || !this.streaming.comentarioStreaming  ||
       this.streaming.valoracionStreaming === null || this.streaming.valoracionStreaming === undefined) {
     this.presentToast('Todos los campos son obligatorios');
     return;
@@ -69,11 +69,8 @@ export class EditarstreamingPage implements OnInit {
 
   clearInput(field: string) {
     switch (field) {
-      case 'imagenStreamingURL':
-        this.streaming.imagenStreamingURL = '';
-        break;
-        case 'fotoStreaming':
-          this.streaming.fotoStreaming = '';
+      case 'fotoStreaming':
+        this.streaming.fotoStreaming = '';
         break;
     }}
   

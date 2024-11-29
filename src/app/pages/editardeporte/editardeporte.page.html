@@ -12,8 +12,10 @@
     <ion-card-content>
 
       <ion-item>
-        <ion-label position="floating">Imagen URL: </ion-label>
-        <ion-input [(ngModel)]="deporte.imagenDeporteURL" type="text" (ionFocus)="clearInput('imagenDeporteURL')"></ion-input>
+        <ion-label position="floating">Foto:</ion-label>
+        <ion-input [(ngModel)]="deporte.fotoCamaraDeporte" type="text" (ionFocus)="clearInput('fotoCamaraDeporte')"></ion-input>
+        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
+        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
       </ion-item>
       
       <ion-item>
@@ -41,17 +43,9 @@
         <br>
         <ion-input [(ngModel)]="deporte.fechaDeporte" type="date"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Foto:</ion-label>
-        <ion-input [(ngModel)]="deporte.fotoCamaraDeporte" type="text" (ionFocus)="clearInput('fotoCamaraDeporte')"></ion-input>
-        <ion-button (click)="tomarFoto()">Tomar Foto</ion-button>
-        <ion-icon name="images-outline" (click)="abrirGaleria()">Galería</ion-icon>
-      </ion-item>
       <br>
-
       <ion-button expand="block" (click)="actualizarDeporte()">Actualizar Deporte</ion-button>
-
+      <br>
     </ion-card-content>
   </ion-card>
 </ion-content>

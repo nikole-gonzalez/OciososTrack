@@ -17,7 +17,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item style="justify-content: center;">
-          <img [src]="juego.imagenJuegoURL" alt="Imagen del juego" />
+          <img [src]="juego.fotoCamaraJuego" alt="Imagen del juego" />
         </ion-item>
         <ion-item>
           <ion-label>Descripción: {{ juego.descripcionJuego }} </ion-label>
@@ -27,11 +27,6 @@
         </ion-item>
         <ion-item>
           <ion-label>Valoración: {{ juego.valoracionJuego }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-thumbnail slot="start">
-            <img [src]="juego.fotoCamaraJuego" alt="Imagen del juego" />
-          </ion-thumbnail>
         </ion-item>
         <div class="center-buttons">
         <ion-button (click)="editarJuegos(juego.idJuego)">Editar</ion-button>
