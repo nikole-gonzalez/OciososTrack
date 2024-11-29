@@ -17,16 +17,6 @@ export class SugerenciasComponent  implements OnInit {
   
     constructor(private sug1service : Sug1Service, private router : Router) { }
   
-    /*async ngOnInit() {
-      try {
-        // Llama al método con fallback para obtener las películas
-        this.peliculas = await this.sug1service.getPeliculasConFallback();
-        console.log('Películas obtenidas:', this.peliculas);
-      } catch (error) {
-        console.error('Error al obtener las películas:', error);
-      }
-    }*/
-
       async ngOnInit() {
         try {
           this.loading = true;
