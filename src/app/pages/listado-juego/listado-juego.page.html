@@ -44,3 +44,20 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+
+<!--Tab-->
+<ion-footer>
+  <!-- Tab pestañas con ion-segment -->
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="usuario">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="sugerencias">
+      <ion-icon name="sparkles-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="configuracion">
+      <ion-icon name="sad-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>
