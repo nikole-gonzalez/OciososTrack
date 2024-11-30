@@ -2,7 +2,7 @@
   <ion-toolbar style="--background: rgb(246, 244, 235);">
     <ion-title>Registra tus manualidades </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/listado-deportes"></ion-back-button>
+      <ion-back-button defaultHref="/listado-artes"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -27,7 +27,7 @@
                 
       <ion-item>
         <ion-label position="floating">Nombre: </ion-label>
-        <ion-input [(ngModel)]="nombreArte"  type="text"></ion-input>
+        <ion-input [(ngModel)]="nombreArte" type="text"></ion-input>
       </ion-item>
       <ion-text color="danger" *ngIf="!nombreArte && formTouched">El nombre es obligatorio.</ion-text>
 

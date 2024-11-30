@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'ociosos1',
+  appId: 'ociosos.track.proyecto.com',
+  appName: 'OciososTrack',
   webDir: 'www'
 };
 
